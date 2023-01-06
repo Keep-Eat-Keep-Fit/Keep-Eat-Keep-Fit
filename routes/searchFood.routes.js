@@ -13,8 +13,8 @@ router.get("/searchFood", (req, res, next) => {
         url: baseURL,
         params: {ingr: foodName}, 
         headers: {
-          'X-RapidAPI-Key': '355642015fmsh33e4fe49576ea55p16107ejsncf5aaac473a7',
-          'X-RapidAPI-Host': 'edamam-food-and-grocery-database.p.rapidapi.com'
+          'X-RapidAPI-Key': process.env.CLIENT_KEY,
+          'X-RapidAPI-Host': process.env.CLIENT_HOST
         }
       };
 
