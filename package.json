@@ -20,5 +20,18 @@
   },
   "devDependencies": {
     "nodemon": "^2.0.20"
-  }
+  },
+  "main": "app.js",
+  "repository": {
+    "type": "git",
+    "url": "git+https://github.com/Keep-Eat-Keep-Fit/Keep-Eat-Keep-Fit.git"
+  },
+  "keywords": [],
+  "author": "",
+  "license": "ISC",
+  "bugs": {
+    "url": "https://github.com/Keep-Eat-Keep-Fit/Keep-Eat-Keep-Fit/issues"
+  },
+  "homepage": "https://github.com/Keep-Eat-Keep-Fit/Keep-Eat-Keep-Fit#readme",
+  "description": ""
 }
