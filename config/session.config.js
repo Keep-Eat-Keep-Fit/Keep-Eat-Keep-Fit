@@ -22,7 +22,7 @@ module.exports = app => {
                 maxAge: 3600000 
             },
             store: MongoStore.create({
-                mongoUrl: process.env.MONGODB_URI || 'mongodb://0.0.0.0/Keep Eat Keep Fit',
+                mongoUrl: process.env.MONGODB_URI || 'mongodb://0.0.0.0/Keep-Eat-Keep-Fit',
                        
                 ttl: 60 * 60 *24 
             })
