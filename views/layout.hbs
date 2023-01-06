@@ -21,8 +21,9 @@
                {{#if userDetails}}
                Hello {{userDetails.username}},
                <form action="/logout" method="POST">
-                  <button>Logout</button>
+                  <button>Logout</button>                  
                </form>
+               <button><a href="/user-profile">My Page</a> </button>
                {{else}}
                <a href="/signup">Register</a> |
                <a href="/login">Login</a> |
