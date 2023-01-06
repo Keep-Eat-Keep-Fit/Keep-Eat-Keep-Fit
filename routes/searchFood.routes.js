@@ -1,7 +1,7 @@
 
 const express = require('express');
 const router = express.Router();
-const axios = require('axios')
+const axios = require('axios');
 const baseURL = 'https://edamam-food-and-grocery-database.p.rapidapi.com/parser'
 
 router.get("/searchFood", (req, res, next) => {
@@ -19,9 +19,18 @@ router.get("/searchFood", (req, res, next) => {
       };
 
       axios.request(options)
-      .then(function (response) {
-          console.log(response.data);
-      })
+        .then((response) => {
+          let results = response.data.hints;
+          // let nutrition = response.data.parsed[0].food.nutrients;
+          // let energy = nutrition.ENERC_KCAL;
+          // let protein = nutrition.PROCNT;
+          // let fat = nutrition.FAT;
+          // let carbohydrate = nutrition.CHOCDF;
+          // let fiber = nutrition.FIBTG;
+          // console.log(energy, protein, fat, carbohydrate, fiber);
+          console.log(results);
+          res.render("search/searchFood-result", {foodArr: results});
+        })
       .catch(function (error) {
           console.error(error);
     });
