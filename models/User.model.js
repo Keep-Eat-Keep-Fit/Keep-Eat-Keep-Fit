@@ -20,14 +20,14 @@ const userSchema = new Schema(
       type: String,
       required: [true, 'Password is required.']
     },
-    birthdate:{
-      type: String,
+    age:{
+      type: Number,
       required: false
     },
     gender:{
       type:String,
       required: false,
-      enum:["male","female","diverse"]      
+      enum:["male","female"]      
     },
     weight:{
       type:Number,
