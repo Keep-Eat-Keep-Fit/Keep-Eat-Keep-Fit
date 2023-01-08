@@ -33,8 +33,8 @@ app.use( (req, res, next) => {
 // 👇 Start handling routes here
 app.use("/", require("./routes/index.routes"));
 app.use("/", require("./routes/searchFood.routes"))
-
-
+app.use("/", require("./routes/auth.routes")); 
+app.use("/", require("./routes/user.routes")); 
 // ❗ To handle errors. Routes that don't exist or errors that you handle in specific routes
 require("./error-handling")(app);
 

@@ -12,9 +12,15 @@
                                 {{/if}} 
                                     <h1>{{this.food.label}}</h1>
 
-                                    <p>Calories: {{this.food.nutrients.ENERC_KCAL}} kcal</p>
-                                    
-                                    <a href="">Details</a>
+                                    <p>Energy: {{this.food.nutrients.ENERC_KCAL}} kcal</p>
+                                    <p>Protein: {{this.food.nutrients.PROCNT}}</p>
+                                    <p>Total lipid (Fat): {{this.food.nutrients.FAT}}</p>
+                                    <p>Carbohydrate: {{this.food.nutrients.CHOCDF}}</p>
+                                    <p>Fiber: {{this.food.nutrients.FIBTG}}</p>
+                                <form  method="post">   
+                                    <input type="text" value= "{{this.food.nutrients.ENERC_KCAL}}" hidden/>
+                                <button>Add</button>
+                                </form> 
                             </section>        
                         </div>  
                  </div>

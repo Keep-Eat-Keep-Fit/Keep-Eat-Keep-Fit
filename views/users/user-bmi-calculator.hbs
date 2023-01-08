@@ -1,0 +1,25 @@
+<div class="bmiCalculator">
+    <h3>BMI CALCULATOR</h3>  
+
+
+        <label class="userAge"> Age:
+            <input type="number" name="age" value="{{age}}" required/>
+        </label>
+        <label> Gender:
+        <input type="text" name="gender" value="{{gender}}" required/>
+        </label>
+        <label class="userHeight"> Height:
+            <input type="number" name="height" value="{{height}}" required/>CM
+        </label>
+        <label class="userWeight"> Weight:
+            <input type="number" name="weight" value="{{weight}}" required/>KG
+        </label>
+        
+    <form action="/user-profile/bmi-calculator" method="post">
+        <button>Calculate</button>
+         <h2 class="bmiValue">Total: <span>{{bmiResult2}}</span></h2>
+    </form>   
+      
+ 
+</div>
+
