@@ -1,35 +1,30 @@
-<div>
-    <h3>IBM CALCULATOR</h3>
-    <form action="/user-profile/edit" method="POST">
+<h1>Here is your profile details</h1>
+
+<form action="/user-profile/edit" method="post">
+    <label> Username
+        <input type="text" name="username" value="{{username}}" />
+    </label>
+    <label> Email
+        <input type="email" name="email" value="{{email}}" />
+    </label>
+    <label> Age
+        <input type="number" name="age" value="{{age}}" />
+    </label>  
+
+    <label> Gender
+         <select name="gender">            
+            <option value="{{gender}}">Male</option>
+            <option value="{{gender}}">Female</option>
+        </select>       
+    </label>
 
 
-        <label> Age
-            <input type="number" name="age" value="{{userInfo.age}}"/>
-        </label>
+    <label> Height
+        <input type="number" name="height" value="{{height}}" />CM
+    </label>
+    <label> Weight
+        <input type="number" name="weight" value="{{weight}}" />KG
+    </label>
 
-        <fieldset>
-            <legend>Gender</legend>
-
-            <div>
-                <input type="radio" id="male" name="gender" value="male" checked>
-                <label for="gender">Male</label>
-            </div>
-
-            <div>
-                <input type="radio" id="female" name="gender" value="female">
-                <label for="gender">Female</label>
-            </div>
-
-        </fieldset>
-
-        <label> Height
-            <input type="number" name="height" value="{{userInfo.height}}"/>CM
-        </label>
-        <label> Weight
-            <input type="number" name="weight" value="{{userInfo.weight}}"/>KG
-        </label>
-
-        <button type="submit">Calculate</button>
-
-    </form>
-</div>
+    <button>submit</button>
+</form>

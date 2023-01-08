@@ -27,7 +27,7 @@ router.post("/signup", (req, res, next) => {
     })
     .then(userFromDB => {
       //console.log('Newly created user is: ', userFromDB);
-      res.redirect("/users/user-profile");
+      res.redirect("/");
     })
     .catch(e => {
         console.log("error creating user account",e)
@@ -71,8 +71,20 @@ router.post("/login", (req, res, next) => {
 
 //User Profile
 router.get("/user-profile", (req, res) => {
+    //console.log(req.session.currentUser);
     res.render("users/user-profile", {userInsession: req.session.currentUser});    
 });
+
+
+
+
+
+
+
+
+
+
+
 
 //Logout
 router.post('/logout', (req, res, next) => {
