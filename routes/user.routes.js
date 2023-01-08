@@ -26,7 +26,7 @@ router.get("/user-profile/details", (req, res) =>{
 //display user-information UPDATE (add the rest of the infomation we have mentioned in User-model )
 router.get("/user-profile/edit", (req, res) =>{   
   const userId = req.session.currentUser._id;
-  console.log(userId); 
+  //console.log(userId); 
    User.findById(userId)
       .then((userInfo) =>{  
        res.render("users/user-profile-edit", userInfo)
@@ -47,7 +47,7 @@ router.post("/user-profile/edit",(req, res, next) =>{
    }
    User.findByIdAndUpdate(userId, updatedData)
       .then((userInf) =>{
-        console.log(userInf)
+        //console.log(userInf)
         res.redirect("/user-profile")
       })
       .catch(err => {
@@ -56,11 +56,27 @@ router.post("/user-profile/edit",(req, res, next) =>{
     });
 });
 
-//display IBM-Calculator
-router.get("/user-profile/ibm-calculator", (req, res, next) =>{
+//display BMI-Calculator
+router.get("/user-profile/bmi-calculator", (req, res, next) =>{
   const userInfo = req.session.currentUser ;
-  console.log(userInfo);
-  res.render("users/user-ibm-calculator", userInfo)
+  //console.log(userInfo);
+  res.render("users/user-bmi-calculator", userInfo)
+});
+
+router.post("/user-profile/bmi-calculator", dbHasInfoOfUser, (req, res, next) =>{
+  const userInfo = req.session.currentUser ;
+  const {age, gender, weight, height} = userInfo;
+  const bmiResult = weight/(height/100)**2; 
+  const bmiResult2 = bmiResult.toFixed(2);
+  const data = {
+    age,
+    gender,
+    weight,
+    height,
+    bmiResult2
+  }
+  // console.log(data);
+  res.render("users/user-bmi-calculator", data)
 });
 
 
