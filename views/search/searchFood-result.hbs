@@ -1,0 +1,25 @@
+<div class="container-fluid">
+    <div class="row">    
+        {{#each foodArr}}
+            <div class="col-12 col-sm-3 ">
+                <div class="card product">
+                    <div class="card-body text-center">
+                            <section class="food-container">
+                                {{#if this.food.image}}
+                                    <img src="{{this.food.image}}" class="card-img-top">
+                                    {{else}}
+                                    <h3>Sorry, there are no pictures.</h3>
+                                {{/if}} 
+                                    <h1>{{this.food.label}}</h1>
+
+                                    <p>Calories: {{this.food.nutrients.ENERC_KCAL}} kcal</p>
+                                    
+                                    <a href="">Details</a>
+                            </section>        
+                        </div>  
+                 </div>
+            </div>
+        {{/each}}    
+                    
+    </div>
+</div>
