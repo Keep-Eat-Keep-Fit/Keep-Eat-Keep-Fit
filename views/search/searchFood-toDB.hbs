@@ -18,9 +18,10 @@
                                     <p>Total lipid (Fat): {{this.food.nutrients.FAT}}</p>
                                     <p>Carbohydrate: {{this.food.nutrients.CHOCDF}}</p>
                                     <p>Fiber: {{this.food.nutrients.FIBTG}}</p>
-                                <form  method="post">   
-                                    <input type="text" value= "{{this.food.nutrients.ENERC_KCAL}}" hidden/>
-                                <button>Add</button>
+                                <form action="/food/create" method="post">
+                                    <input type="text" value= "{{this.food.label}}" name="name" hidden>   
+                                    <input type="number" value= "{{this.food.nutrients.ENERC_KCAL}}" name="energy"/>
+                                <button type="submit">Add</button>
                                 </form> 
                             </section>        
                         </div>  

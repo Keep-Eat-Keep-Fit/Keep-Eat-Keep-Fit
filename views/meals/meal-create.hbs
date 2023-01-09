@@ -12,11 +12,8 @@
 <br>
 <form action="/meals/create" method="post">
     <label> User Name:
-       <select name="userName">
-            {{#each userArr}}
-            <option value="{{this._id}}">{{this.username}}</option>
-            {{/each}}
-      </select>
+       <h2>{{username}}</h2>
+       <input type="text" value= "{{username}}" name="userName" hidden>   
     </label>
 
     <label> Date:
@@ -25,19 +22,35 @@
 
 
     <label> Food of Breakfast:
-        <input type="text" name="breakfastFood"/> 
+        <select name="breakfastFood" multiple>
+            {{#each foodArr}}
+            <option value="{{this._id}}">{{this.name}}</option>
+            {{/each}}
+        </select>
     </label>
 
     <label> Food of Lunch:
-        <input type="text" name="lunchFood"/> 
+        <select name="lunchFood" multiple>
+            {{#each foodArr}}
+            <option value="{{this._id}}">{{this.name}}</option>
+            {{/each}}
+        </select>
     </label>
 
     <label> Food of Dinner:
-        <input type="text" name="dinnerFood"/> 
+        <select name="dinnerFood" multiple>
+            {{#each foodArr}}
+            <option value="{{this._id}}">{{this.name}}</option>
+            {{/each}}
+        </select>
     </label>
 
     <label> I also eat these today:
-        <input type="text" name="otherFood"/> 
+        <select name="otherFood" multiple>
+            {{#each foodArr}}
+            <option value="{{this._id}}">{{this.name}}</option>
+            {{/each}}
+        </select>
     </label>
 
     <label> Calories:

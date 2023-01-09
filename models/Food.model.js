@@ -2,8 +2,14 @@ const { Schema, model } = require("mongoose");
 
 const foodSchema = new Schema(
     {
-        foodName: String,
-        energy: Number
+        name: {
+            type: String,
+            required: true,
+        },
+        energy: {
+            type: Number,
+            required: true
+        }
     },
     {
       timestamps: true

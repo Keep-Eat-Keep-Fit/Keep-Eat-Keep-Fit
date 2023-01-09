@@ -3,37 +3,29 @@ const { Schema, model, default: mongoose } = require('mongoose');
 const mealSchema = new Schema(
   { 
     userName: {
-        type: mongoose.Schema.Types.ObjectId,
-        ref: "User" 
+        type: String,
+        required: true 
     },   
     date: {
         type: Date,
         required: true
     },
-    breakfastFood: {
-        type: String,
-        required: false,
-        lowercase: true,
-        trim: true
-    },
-    lunchFood: {
-        type: String,
-        required: false,
-        lowercase: true,
-        trim: true
-    },
-    dinnerFood: {
-        type: String,
-        required: false,
-        lowercase: true,
-        trim: true
-    },
-    otherFood: {
-        type: String,
-        required: false,
-        lowercase: true,
-        trim: true
-    },
+    breakfastFood: [{
+        type: mongoose.Schema.Types.ObjectId,
+        ref: "Food"
+    }],
+    lunchFood: [{
+        type: mongoose.Schema.Types.ObjectId,
+        ref: "Food" 
+    }],
+    dinnerFood: [{
+        type: mongoose.Schema.Types.ObjectId,
+        ref: "Food" 
+    }],
+    otherFood: [{
+        type: mongoose.Schema.Types.ObjectId,
+        ref: "Food" 
+    }],
     calories: {
         type: Number,
         required: true

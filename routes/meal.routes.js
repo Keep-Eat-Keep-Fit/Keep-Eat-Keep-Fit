@@ -1,19 +1,27 @@
 const User = require("../models/User.model");
 const Meal = require("../models/Meal.model");
+const Food = require("../models/Food.model");
 const express = require('express');
 const router = express.Router();
 
 //CREATE: display form
 router.get("/meals/create", (req, res, next) => {
-    User.find()
-        .then((userArr) => {
-            //console.log(userArr);
-            res.render("meals/meal-create", {userArr})
-        })
-        .catch(err => {
-            console.log("error getting meals from DB", err);
-            next(err);
-        })
+    const {username} = req.session.currentUser;
+    Food.find()
+        .then((foodArr) => {
+            const data = {
+                username,
+                foodArr
+            }
+            res.render("meals/meal-create", data)
+    })
+    .catch(err => {
+        console.log("error getting food from DB", err);
+        next(err);
+    })
+
+
+    
 })
 
 //CREATE: process form
@@ -48,6 +56,8 @@ router.get("/meals", (req, res, next) => {
             console.log("error getting meals from DB", err);
             next(err);
         })
+
+    
 
 })
 
