@@ -28,7 +28,7 @@ const mealSchema = new Schema(
     }],
     calories: {
         type: Number,
-        required: true
+        required: false
     }
   },
   {

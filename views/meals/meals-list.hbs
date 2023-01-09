@@ -1,0 +1,31 @@
+<h1>Meals in your DB</h1>
+ 
+{{#each meals}}
+    <section class="book-summary">
+        <h2>Date of meal: {{this.date}}</h2>
+        <p>
+            Food of Breakfast:
+            {{#each this.breakfastFood}}
+                 {{name}} 
+            {{/each}}
+            <br>
+            Food of Lunch: 
+            {{#each this.lunchFood}}
+                 {{name}} 
+            {{/each}}
+            <br>
+            Food of Dinner:
+            {{#each this.dinnerFood}}
+                 {{name}} 
+            {{/each}}
+            <br>
+            This day I also ate: 
+            {{#each this.otherFood}}
+                {{name}}
+            {{/each}}
+            <br>
+            Calories: {{this.calories}} <br>
+            
+        </p>
+    </section>
+{{/each}}

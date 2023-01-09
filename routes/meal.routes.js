@@ -33,9 +33,8 @@ router.post("/meals/create", (req, res, next) => {
     let mealDetails = { userName, date, breakfastFood, lunchFood, dinnerFood, otherFood, calories}
 
     Meal.create(mealDetails)
-        .then(mealDetails => {
-            console.log(mealDetails);
-            // res.redirect("/meals")
+        .then(mealDetails => {   
+            res.redirect("/meals")
         })
         .catch(err => {
             console.log("error creating meals from DB", err);
@@ -45,12 +44,17 @@ router.post("/meals/create", (req, res, next) => {
 
 //READ: List all meals
 router.get("/meals", (req, res, next) => {
-    Meal.find()
-        .populate("userName")
+    const {username} = req.session.currentUser;
+
+    Meal.find({userName: username})
+        .populate("breakfastFood")
+        .populate("lunchFood")
+        .populate("dinnerFood")
+        .populate("otherFood")
         .then(mealsFromDB => {
             console.log(mealsFromDB)
 
-            // res.render("meals/meals-list", { meals: mealsFromDB })
+            res.render("meals/meals-list", { meals: mealsFromDB })
         })
         .catch(err => {
             console.log("error getting meals from DB", err);
