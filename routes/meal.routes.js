@@ -7,9 +7,10 @@ const baseURL = 'https://edamam-food-and-grocery-database.p.rapidapi.com/parser'
 
 //CREATE: display form
 router.get("/meals/create", (req, res, next) => {
-    Meal.find()
-        .then((mealArr) => {
-            res.render("meals/meal-create", {mealArr})
+    User.find()
+        .then((userArr) => {
+            //console.log(userArr);
+            res.render("meals/meal-create", {userArr})
         })
         .catch(err => {
             console.log("error getting meals from DB", err);
@@ -19,21 +20,38 @@ router.get("/meals/create", (req, res, next) => {
 
 //CREATE: process form
 router.post("/meals/create", (req, res, next) => {
-    const { userName, date, haveBreakfast, nameOfBreakfast, breakfastFood, nameOfLunch, lunchFood, nameOfDinner, dinnerFood, nameOfOthers, otherFood, calories
+    const { 
+        userName, date, breakfastFood, lunchFood, dinnerFood, otherFood, calories
     } = req.body;
 
-    Meal.find()
-        .then((mealArr) => {
-            res.render("meals/meal-create", {mealArr})
+    let mealDetails = { userName, date, breakfastFood, lunchFood, dinnerFood, otherFood, calories}
+
+    Meal.create(mealDetails)
+        .then(mealDetails => {
+            console.log(mealDetails);
+            // res.redirect("/meals")
         })
         .catch(err => {
-            console.log("error getting meals from DB", err);
+            console.log("error creating meals from DB", err);
             next(err);
         })
 })
 
 //READ: List all meals
+router.get("/meals", (req, res, next) => {
+    Meal.find()
+        .populate("userName")
+        .then(mealsFromDB => {
+            console.log(mealsFromDB)
 
+            // res.render("meals/meals-list", { meals: mealsFromDB })
+        })
+        .catch(err => {
+            console.log("error getting meals from DB", err);
+            next(err);
+        })
+
+})
 
 //READ: Meal details
 

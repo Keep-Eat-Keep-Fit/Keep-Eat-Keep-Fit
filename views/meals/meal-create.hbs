@@ -1,0 +1,37 @@
+<h2>Create a meal</h2>
+
+<form action="/meals/create" method="post">
+    <label> User Name:
+       <select name="userName">
+            {{#each userArr}}
+            <option value="{{this._id}}">{{this.username}}</option>
+            {{/each}}
+      </select>
+    </label>
+
+    <label> Date:
+        <input type="date" name="date" /> 
+    </label>
+
+    <label> Food of Breakfast:
+        <input type="text" name="breakfastFood"/> 
+    </label>
+
+    <label> Food of Lunch:
+        <input type="text" name="lunchFood"/> 
+    </label>
+
+    <label> Food of Dinner:
+        <input type="text" name="dinnerFood"/> 
+    </label>
+
+    <label> I also eat these today:
+        <input type="text" name="otherFood"/> 
+    </label>
+
+    <label> Calories:
+        <input type="number" name="calories" />
+    </label>
+
+    <button type="submit"> Create </button>
+</form>

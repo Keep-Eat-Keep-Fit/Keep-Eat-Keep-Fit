@@ -4,14 +4,10 @@ const mealSchema = new Schema(
   { 
     userName: {
         type: mongoose.Schema.Types.ObjectId,
-        ref: "User" //.username?
+        ref: "User" 
     },   
     date: {
         type: Date,
-        required: true
-    },
-    haveBreakfast: {
-        type: Boolean,
         required: true
     },
     breakfastFood: {
@@ -20,29 +16,17 @@ const mealSchema = new Schema(
         lowercase: true,
         trim: true
     },
-    haveLunch: {
-        type: Boolean,
-        required: true
-    },
     lunchFood: {
         type: String,
         required: false,
         lowercase: true,
         trim: true
     },
-    haveDinner: {
-        type: Boolean,
-        required: true
-    },
     dinnerFood: {
         type: String,
         required: false,
         lowercase: true,
         trim: true
-    },
-    haveOthers: {
-        type: Boolean,
-        required: true
     },
     otherFood: {
         type: String,
