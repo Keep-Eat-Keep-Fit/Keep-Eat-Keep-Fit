@@ -1,22 +1,9 @@
-const User = require("../models/User.model");
-const Meal = require("../models/Meal.model");
+const Food = require("../models/Food.model");
 const express = require('express');
 const router = express.Router();
 
-//CREATE: display form
-router.get("/meals/create", (req, res, next) => {
-    User.find()
-        .then((userArr) => {
-            //console.log(userArr);
-            res.render("meals/meal-create", {userArr})
-        })
-        .catch(err => {
-            console.log("error getting meals from DB", err);
-            next(err);
-        })
-})
 
-//CREATE: process form
+//CREATE: process
 router.post("/meals/create", (req, res, next) => {
     const { 
         userName, date, breakfastFood, lunchFood, dinnerFood, otherFood, calories
@@ -35,7 +22,7 @@ router.post("/meals/create", (req, res, next) => {
         })
 })
 
-//READ: List all meals
+//READ: List all food
 router.get("/meals", (req, res, next) => {
     Meal.find()
         .populate("userName")
@@ -48,11 +35,7 @@ router.get("/meals", (req, res, next) => {
             console.log("error getting meals from DB", err);
             next(err);
         })
-
 })
-
-//READ: Meal details
-
 
 //UPDATE: display form
 
@@ -62,5 +45,3 @@ router.get("/meals", (req, res, next) => {
 
 
 //DELETE
-
-module.exports = router;

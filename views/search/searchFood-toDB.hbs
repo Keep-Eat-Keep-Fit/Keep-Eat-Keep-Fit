@@ -1,4 +1,5 @@
 <div class="container-fluid">
+    <a href="/meals/create">Back to create meal</a>
     <div class="row">    
         {{#each foodArr}}
             <div class="col-12 col-sm-3 ">
@@ -17,6 +18,10 @@
                                     <p>Total lipid (Fat): {{this.food.nutrients.FAT}}</p>
                                     <p>Carbohydrate: {{this.food.nutrients.CHOCDF}}</p>
                                     <p>Fiber: {{this.food.nutrients.FIBTG}}</p>
+                                <form  method="post">   
+                                    <input type="text" value= "{{this.food.nutrients.ENERC_KCAL}}" hidden/>
+                                <button>Add</button>
+                                </form> 
                             </section>        
                         </div>  
                  </div>

@@ -1,5 +1,15 @@
 <h2>Create a meal</h2>
 
+<h3> My Food Database:</h3>
+    <form action="/searchFood-toDB" method="GET">
+        <label>
+            Food:
+            <input type="string" name="foodName">
+        </label>
+        <button type="submit">Search</button>
+    </form>
+
+<br>
 <form action="/meals/create" method="post">
     <label> User Name:
        <select name="userName">
@@ -12,6 +22,7 @@
     <label> Date:
         <input type="date" name="date" /> 
     </label>
+
 
     <label> Food of Breakfast:
         <input type="text" name="breakfastFood"/> 
