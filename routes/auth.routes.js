@@ -45,8 +45,7 @@ router.post("/signup", (req, res, next) => {
         passwordHash: hash
       });      
     })
-    .then(userFromDB => {
-      //console.log('Newly created user is: ', userFromDB);     
+    .then(() => {      
       res.redirect("/");
     })
     .catch(e => {

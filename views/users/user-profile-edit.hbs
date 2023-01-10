@@ -1,35 +1,48 @@
-<div class="m-5 text-center">
-    <h4 class="m-4">Here is your profile details</h4>
-    
+
+<div class="text-center position-absolute top-50 start-50 translate-middle" style="width: 30%;">
+    <h3 class="m-4">Here is your profile details</h3>
+
     <form action=" /user-profile/edit" method="post">
-        <div class="d-flex flex-column text-center">
-            <label> Username:
-                <input type="text" name="username" value="{{username}}" />
-            </label>
-            <label> Email:
-                <input type="email" name="email" value="{{email}}" />
-            </label>
-            <label> Age:
-                <input type="number" name="age" value="{{age}}" />
-            </label>
-            <div>
-                <label> Gender:</label>
-                <select name="gender" value="{{gender}}">
-                    <option>--Please tell me your Gender--</option>
+
+        <div class="m-5 d-flex flex-column text-center">
+            <div class="input-group flex-nowrap mb-3 ">
+                <span class="input-group-text col-4" id="addon-wrapping">Username :</span>
+                <input type="text" class="form-control" value="{{username}}" aria-describedby="addon-wrapping"
+                    required />
+            </div>
+            <div class="input-group flex-nowrap mb-3">
+                <span class="input-group-text col-4" id="addon-wrapping">Email :</span>
+                <input type="email" class="form-control" value="{{email}}" aria-describedby="addon-wrapping" required />
+            </div>
+            <div class="input-group flex-nowrap mb-3">
+                <span class="input-group-text col-4" id="addon-wrapping">Age :</span>
+                <input type="text" class="form-control" value="{{age}}" aria-describedby="addon-wrapping" required />
+            </div>
+            <div class="input-group flex-nowrap mb-3">
+                <span class="input-group-text col-4" id="addon-wrapping">Gender :</span>
+                <select class="form-select" name="gender">
+
                     <option value="male">Male</option>
                     <option value="female">Female</option>
                 </select>
             </div>
-            <label> Height
-                <input type="number" name="height" value="{{height}}" />CM
-            </label>
-            <label> Weight
-                <input type="number" name="weight" value="{{weight}}" />KG
-            </label>
-            <div class="text-center m-3">
-                <button class="btn btn-secondary col-2">submit</button>
+            <div class="input-group flex-nowrap mb-3">
+                <span class="input-group-text col-4" id="addon-wrapping">Height :</span>
+                <input type="number" class="form-control" value="{{height}}" aria-describedby="addon-wrapping"
+                    required />
+                <span class="input-group-text" id="basic-addon2"> CM </span>
             </div>
+            <div class="input-group flex-nowrap mb-3">
+                <span class="input-group-text col-4" id="addon-wrapping">Weight :</span>
+                <input type="number" class="form-control" value="{{weight}}" aria-describedby="addon-wrapping"
+                    required />
+                <span class="input-group-text ps-3" id="basic-addon2"> KG </span>
             </div>
+            <div class="text-center m-4">
+                <button class="btn btn-secondary col-4">submit</button>
+            </div>
+        </div>
+
     </form>
-   
+
 </div>
