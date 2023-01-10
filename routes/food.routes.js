@@ -9,9 +9,10 @@ const notice = () => {
 
 //CREATE: process
 router.post("/food/create", (req, res, next) => {
-   // console.log(req.body.name);
+   const {username} = req.session.currentUser;
     
     const foodDetails = {
+        userName : username,
         name: req.body.name,
         energy: req.body.energy
     }

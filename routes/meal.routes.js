@@ -3,6 +3,7 @@ const Meal = require("../models/Meal.model");
 const Food = require("../models/Food.model");
 const express = require('express');
 const router = express.Router();
+const dayjs = require('dayjs')
 
 //CREATE: display form
 router.get("/meals/create", (req, res, next) => {
@@ -26,7 +27,7 @@ router.get("/meals/create", (req, res, next) => {
 
 //CREATE: process form
 router.post("/meals/create", (req, res, next) => {
-    const { 
+    let { 
         userName, date, breakfastFood, lunchFood, dinnerFood, otherFood, calories
     } = req.body;
 
@@ -34,6 +35,7 @@ router.post("/meals/create", (req, res, next) => {
 
     Meal.create(mealDetails)
         .then(mealDetails => {   
+            console.log("create success");
             res.redirect("/meals")
         })
         .catch(err => {
@@ -46,15 +48,29 @@ router.post("/meals/create", (req, res, next) => {
 router.get("/meals", (req, res, next) => {
     const {username} = req.session.currentUser;
 
+    // const {energy, quantity} = req.query
+
     Meal.find({userName: username})
         .populate("breakfastFood")
         .populate("lunchFood")
         .populate("dinnerFood")
         .populate("otherFood")
-        .then(mealsFromDB => {
-            console.log(mealsFromDB)
+        .then(mealsArr => {
+            //can't change DB --> ask for help
+            // const newDate = {
+            //     date: dayjs(mealsArr.date).format('DD/MM/YYYY')
+            // }
 
-            res.render("meals/meals-list", { meals: mealsFromDB })
+
+            
+            // Meal.findByIdAndUpdate(id, newDate)
+// const meals = {
+//     mealsArr,
+//     energyResult2,
+//     eachFoodEn
+// }
+
+            res.render("meals/meals-list", {meals: mealsArr})
         })
         .catch(err => {
             console.log("error getting meals from DB", err);
@@ -63,6 +79,25 @@ router.get("/meals", (req, res, next) => {
 
     
 
+})
+
+//Calculate Calorie
+router.post("/meals/calculateCalorie", (req, res, next) => {
+    
+    const {energy, quantity, id} = req.body;
+    const calories = energy * quantity;
+    const newData = {
+        quantity: quantity,
+        
+    }
+
+    Food.findByIdAndUpdate(id)
+        .then(
+            
+        )
+        .catch()
+    res.render("meals/meals-list", {calories});
+    res.redirect("/meals")
 })
 
 //READ: Meal details

@@ -6,8 +6,25 @@
         <p>
             Food of Breakfast:
             {{#each this.breakfastFood}}
-                 {{name}} 
+                 <br>
+                 {{name}} |
+                 Energy: {{energy}} kcals |
+                 <form action="/meals/calculateCalorie" method="post">
+                    Pieces: <input type="number" value="{{quantity}}" min="1" name="quantity" id="qty_bf" required> |
+                    <input type="number" value="{{this.energy}}" name="energy" hidden>
+                    <input type="string" value="{{_id}}" name="id" hidden>
+                    <button type="submit">Confirm</button>
+                    Calories: {{calories}}
+                 </form>
+                 
+
+                 <br> 
+                
             {{/each}}
+        {{!-- <form action="/meals" method="post">
+            <button>Calculate Energy</button>
+            <h2 class="energyValue">Total: <span>{{energyResult2}}</span></h2>
+        </form> --}}
             <br>
             Food of Lunch: 
             {{#each this.lunchFood}}
