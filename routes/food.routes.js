@@ -14,7 +14,7 @@ router.post("/food/create", (req, res, next) => {
     const foodDetails = {
         userName : username,
         name: req.body.name,
-        energy: req.body.energy
+        energy: Math.round(req.body.energy) 
     }
     console.log(foodDetails);
     Food.create(foodDetails)

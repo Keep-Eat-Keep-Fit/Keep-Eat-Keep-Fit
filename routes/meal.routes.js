@@ -8,7 +8,7 @@ const dayjs = require('dayjs')
 //CREATE: display form
 router.get("/meals/create", (req, res, next) => {
     const {username} = req.session.currentUser;
-    Food.find()
+    Food.find({userName: username})
         .then((foodArr) => {
             const data = {
                 username,
@@ -30,7 +30,7 @@ router.post("/meals/create", (req, res, next) => {
     let { 
         userName, date, breakfastFood, lunchFood, dinnerFood, otherFood, calories
     } = req.body;
-
+    
     let mealDetails = { userName, date, breakfastFood, lunchFood, dinnerFood, otherFood, calories}
 
     Meal.create(mealDetails)
@@ -61,15 +61,6 @@ router.get("/meals", (req, res, next) => {
             //     date: dayjs(mealsArr.date).format('DD/MM/YYYY')
             // }
 
-
-            
-            // Meal.findByIdAndUpdate(id, newDate)
-// const meals = {
-//     mealsArr,
-//     energyResult2,
-//     eachFoodEn
-// }
-
             res.render("meals/meals-list", {meals: mealsArr})
         })
         .catch(err => {
@@ -88,15 +79,20 @@ router.post("/meals/calculateCalorie", (req, res, next) => {
     const calories = energy * quantity;
     const newData = {
         quantity: quantity,
-        
+        energy: energy,
+        totalCalories: calories
     }
 
-    Food.findByIdAndUpdate(id)
-        .then(
-            
-        )
-        .catch()
-    res.render("meals/meals-list", {calories});
+    Food.findByIdAndUpdate(id, newData)
+        .then(() => {
+            console.log('update success')
+            res.redirect(`/meals`)
+        })
+        .catch(err => {
+            console.log("error update meals from DB", err);
+            next(err)
+        })
+    res.render("meals/meals-list", newData);
     res.redirect("/meals")
 })
 

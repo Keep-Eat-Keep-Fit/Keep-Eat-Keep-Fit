@@ -14,6 +14,10 @@ const mealSchema = new Schema(
         type: mongoose.Schema.Types.ObjectId,
         ref: "Food"
     }],
+    breakcalories: {
+        type: Number,
+        required: false
+    },
     lunchFood: [{
         type: mongoose.Schema.Types.ObjectId,
         ref: "Food" 
