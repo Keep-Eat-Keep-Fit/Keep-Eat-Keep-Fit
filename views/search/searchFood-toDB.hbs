@@ -1,0 +1,32 @@
+<div class="container-fluid">
+    <a href="/meals/create">Back to create meal</a>
+    <div class="row">    
+        {{#each foodArr}}
+            <div class="col-12 col-sm-3 ">
+                <div class="card product">
+                    <div class="card-body text-center">
+                            <section class="food-container">
+                                {{#if this.food.image}}
+                                    <img src="{{this.food.image}}" class="card-img-top">
+                                    {{else}}
+                                    <h3>Sorry, there are no pictures.</h3>
+                                {{/if}} 
+                                    <h1>{{this.food.label}}</h1>
+
+                                    <p>Energy: {{this.food.nutrients.ENERC_KCAL}} kcal</p>
+                                    <p>Protein: {{this.food.nutrients.PROCNT}}</p>
+                                    <p>Total lipid (Fat): {{this.food.nutrients.FAT}}</p>
+                                    <p>Carbohydrate: {{this.food.nutrients.CHOCDF}}</p>
+                                    <p>Fiber: {{this.food.nutrients.FIBTG}}</p>
+                                <form action="/food/create" method="post">
+                                    <input type="text" value= "{{this.food.label}}" name="name" hidden>   
+                                    <input type="number" value= "{{this.food.nutrients.ENERC_KCAL}}" name="energy" hidden/>
+                                <button type="submit">Add</button>
+                                </form> 
+                            </section>        
+                        </div>  
+                 </div>
+            </div>
+        {{/each}}    
+    </div>
+</div>

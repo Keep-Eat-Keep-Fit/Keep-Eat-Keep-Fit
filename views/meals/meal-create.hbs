@@ -1,0 +1,58 @@
+<h2>Create a meal</h2>
+
+<h3> My Food Database:</h3>
+    <form action="/searchFood-toDB" method="GET">
+        <label>
+            Food:
+            <input type="string" name="foodName">
+        </label>
+        <button type="submit">Search</button>
+    </form>
+
+<br>
+<form action="/meals/create" method="post">
+    <label> User Name:
+       <h2>{{username}}</h2>
+       <input type="text" value= "{{username}}" name="userName" hidden>   
+    </label>
+
+    <label> Date:
+        <input type="date" name="date" /> 
+        
+    </label>
+
+
+    <label> Food of Breakfast:
+        <select name="breakfastFood" multiple>
+            {{#each foodArr}}
+            <option value="{{this._id}}">{{this.name}}</option>
+            {{/each}}
+        </select>
+    </label>
+
+    <label> Food of Lunch:
+        <select name="lunchFood" multiple>
+            {{#each foodArr}}
+            <option value="{{this._id}}">{{this.name}}</option>
+            {{/each}}
+        </select>
+    </label>
+
+    <label> Food of Dinner:
+        <select name="dinnerFood" multiple>
+            {{#each foodArr}}
+            <option value="{{this._id}}">{{this.name}}</option>
+            {{/each}}
+        </select>
+    </label>
+
+    <label> I also eat these today:
+        <select name="otherFood" multiple>
+            {{#each foodArr}}
+            <option value="{{this._id}}">{{this.name}}</option>
+            {{/each}}
+        </select>
+    </label>
+
+    <button type="submit"> Create </button>
+</form>
