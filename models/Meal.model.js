@@ -14,7 +14,7 @@ const mealSchema = new Schema(
         type: mongoose.Schema.Types.ObjectId,
         ref: "Food"
     }],
-    breakcalories: {
+    bfCalories: {
         type: Number,
         required: false
     },
@@ -22,14 +22,26 @@ const mealSchema = new Schema(
         type: mongoose.Schema.Types.ObjectId,
         ref: "Food" 
     }],
+    lunchCalories: {
+        type: Number,
+        required: false
+    },
     dinnerFood: [{
         type: mongoose.Schema.Types.ObjectId,
         ref: "Food" 
     }],
+    dinnerCalories: {
+        type: Number,
+        required: false
+    },
     otherFood: [{
         type: mongoose.Schema.Types.ObjectId,
         ref: "Food" 
     }],
+    otherCalories: {
+        type: Number,
+        required: false
+    },
     calories: {
         type: Number,
         required: false
