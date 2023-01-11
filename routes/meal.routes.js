@@ -48,8 +48,6 @@ router.post("/meals/create", (req, res, next) => {
 router.get("/meals", (req, res, next) => {
     const {username} = req.session.currentUser;
 
-    // const {energy, quantity} = req.query
-    let mealsArr;
     Meal.find({userName: username})
         .populate("breakfastFood")
         .populate("lunchFood")
@@ -61,7 +59,50 @@ router.get("/meals", (req, res, next) => {
                 date: dayjs(mealsArr.date).format('YYYY/MM/DD')
             }
             // console.log(newDate);
-
+            
+            mealsArr.forEach((e) => {
+                let sumCalOfBf = 0;
+                let sumCalOfLunch = 0;
+                let sumCalOfDinner = 0;
+                let sumCalOfOther = 0;
+                mealsArr.forEach((e) => {
+                    for(let i=0; i<e.breakfastFood.length;i++){
+                        sumCalOfBf+=e.breakfastFood[i].totalCalories
+                    }
+                    return sumCalOfBf;
+                })
+                console.log(sumCalOfBf);
+                mealsArr.forEach((e) => {
+                    for(let i=0; i<e.lunchFood.length;i++){
+                        sumCalOfLunch+=e.lunchFood[i].totalCalories
+                    }
+                    return sumCalOfLunch;
+                })
+                mealsArr.forEach((e) => {
+                    for(let i=0; i<e.dinnerFood.length;i++){
+                        sumCalOfDinner+=e.dinnerFood[i].totalCalories
+                    }
+                    return sumCalOfDinner;
+                })
+                mealsArr.forEach((e) => {
+                    for(let i=0; i<e.otherFood.length;i++){
+                        sumCalOfOther+=e.otherFood[i].totalCalories
+                    }
+                    return sumCalOfOther;
+                })
+                let totalCal = sumCalOfBf + sumCalOfLunch + sumCalOfDinner + sumCalOfOther;
+                const newData = {
+                    bfCalories: sumCalOfBf,
+                    lunchCalories: sumCalOfLunch,
+                    dinnerCalories: sumCalOfDinner,
+                    otherCalories: sumCalOfOther,
+                    calories: totalCal
+                }
+                console.log(e.id);
+                console.log(newData);
+                Meal.findByIdAndUpdate(e.id, newData)
+            })
+            //console.log(mealsArr);
             /*
             Meal.findByIdAndUpdate
             const data = {
@@ -69,57 +110,56 @@ router.get("/meals", (req, res, next) => {
             }
             */
 
-            console.log(mealsArr);           
+            //console.log(mealsArr);           
             
             // const newDate = mealsArr.forEach((e) => {
             //    console.log("we need to see", dayjs(e.date).format('DD/MM/YYYY')); 
             // })
             //console.log("we need to see",newDate);
             // console.log(mealsArr.date);
-            // mealsArr.date = 
-            // console.log(mealsArr.date);
-            let sumCalOfBf = 0;
-            let sumCalOfLunch = 0;
-            let sumCalOfDinner = 0;
-            let sumCalOfOther = 0;
-            mealsArr.forEach((e) => {
-                for(let i=0; i<e.breakfastFood.length;i++){
-                    sumCalOfBf+=e.breakfastFood[i].totalCalories
-                }
-                return sumCalOfBf;
-            })
-            console.log(sumCalOfBf);
-            mealsArr.forEach((e) => {
-                for(let i=0; i<e.lunchFood.length;i++){
-                    sumCalOfLunch+=e.lunchFood[i].totalCalories
-                }
-                return sumCalOfLunch;
-            })
-            mealsArr.forEach((e) => {
-                for(let i=0; i<e.dinnerFood.length;i++){
-                    sumCalOfDinner+=e.dinnerFood[i].totalCalories
-                }
-                return sumCalOfDinner;
-            })
-            mealsArr.forEach((e) => {
-                for(let i=0; i<e.otherFood.length;i++){
-                    sumCalOfOther+=e.otherFood[i].totalCalories
-                }
-                return sumCalOfOther;
-            })
-            let totalCal = sumCalOfBf + sumCalOfLunch + sumCalOfDinner + sumCalOfOther;
+            
+            // let sumCalOfBf = 0;
+            // let sumCalOfLunch = 0;
+            // let sumCalOfDinner = 0;
+            // let sumCalOfOther = 0;
+            // mealsArr.forEach((e) => {
+            //     for(let i=0; i<e.breakfastFood.length;i++){
+            //         sumCalOfBf+=e.breakfastFood[i].totalCalories
+            //     }
+            //     return sumCalOfBf;
+            // })
+            // console.log(sumCalOfBf);
+            // mealsArr.forEach((e) => {
+            //     for(let i=0; i<e.lunchFood.length;i++){
+            //         sumCalOfLunch+=e.lunchFood[i].totalCalories
+            //     }
+            //     return sumCalOfLunch;
+            // })
+            // mealsArr.forEach((e) => {
+            //     for(let i=0; i<e.dinnerFood.length;i++){
+            //         sumCalOfDinner+=e.dinnerFood[i].totalCalories
+            //     }
+            //     return sumCalOfDinner;
+            // })
+            // mealsArr.forEach((e) => {
+            //     for(let i=0; i<e.otherFood.length;i++){
+            //         sumCalOfOther+=e.otherFood[i].totalCalories
+            //     }
+            //     return sumCalOfOther;
+            // })
+            // let totalCal = sumCalOfBf + sumCalOfLunch + sumCalOfDinner + sumCalOfOther;
                             
-            const data = {
-                sumCalOfBf,
-                sumCalOfLunch,
-                sumCalOfDinner,
-                sumCalOfOther,
-                totalCal,
-                newDate,
-                mealsArr 
-            }
+            // const data = {
+            //     sumCalOfBf,
+            //     sumCalOfLunch,
+            //     sumCalOfDinner,
+            //     sumCalOfOther,
+            //     totalCal,
+            //     newDate,
+            //     mealsArr 
+            // }
             //console.log(data);
-           res.render("meals/meals-list", data)
+           res.render("meals/meals-list", mealsArr)
         })
         
        
