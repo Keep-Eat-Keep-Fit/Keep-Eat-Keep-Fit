@@ -1,24 +1,92 @@
-<h1>Profile Page</h1>
 
-
-<h2>Welcome you back!</h2>
-<div>
-   
-        <a href="/user-profile/details">Your profile</a>
-
-        <h3>History Review:</h3>
-        <form action="/mealDiaries" method="get">
-            <label for="history">Choose a date:</label>
-            <input type="date" id="historyDate" value="2023-01-01" min="2022-01-01"/>
-        </form>
+<div class="d-flex flex-row">
+        <div class="p-5 col-3 bg-light" style="height:81vh">
+                <h1 class="mb-5 ps-5 ">Profile Page</h1>
+                <h4 class="mb-5 ps-5">Welcome you back!</h4>
+                <div class="d-flex flex-column  ps-5">
+                        <a class="my-2 nav-link fs-5 text-secondary" href="/">Home</a>
         
-        <a href="/meals/create">New Meal Diary</a> <br>
-        <a href="/meals">View all meals</a>
-    
+                        <a class="my-2 nav-link fs-5 text-secondary" href="/user-profile/details">Your profile</a>
+        
+                        <a class="my-2 nav-link fs-5 text-secondary" href="/meals">History Review</a>
+        
+                        <a class="my-2 nav-link fs-5 text-secondary" href="/meals/create">New Meal Diary</a>
+        
+                        <a class="my-2 nav-link fs-5 text-secondary" href="user-profile/bmi-Calculator">BMI Calculator</a>
+        
+                </div>
+        </div>
+
+        <div class="m-5 col-5 ps-5">
+                <div class="row row-cols-1 row-cols-md-2 g-4">
+                        <div class="col">
+                                <div class="card border-secondary mb-3" style="max-width: 20rem;">
+                                        <div class="card-header"><a class="my-2 nav-link" href="/">Home</a></div>
+                                        <div class="card-body text-secondary">
+                                                <p class="card-text">You can go back to the homepage to search Food and
+                                                        check
+                                                        the
+                                                        calories you
+                                                        have eaten...</p>
+                                        </div>
+                                </div>
+                        </div>
+                        <div class="col">
+                                <div class="card border-secondary mb-3" style="max-width: 20rem;">
+                                        <div class="card-header"><a class="my-2 nav-link"
+                                                        href="/user-profile/details">Your
+                                                        profile</a>
+                                        </div>
+                                        <div class="card-body text-secondary">
+                                                <p class="card-text">Here you can see your personal informations you
+                                                        have
+                                                        provided and
+                                                        update
+                                                        your profile...</p>
+                                        </div>
+                                </div>
+                        </div>
+                        <div class="col">
+                                <div class="card border-secondary mb-3" style="max-width: 20rem;">
+                                        <div class="card-header"><a class="my-2 nav-link" href="#">History Review</a>
+                                        </div>
+                                        <div class="card-body text-secondary">
+                                                <p class="card-text">Here you can check the meal diaries you have
+                                                        submitted and
+                                                        see if
+                                                        you need
+                                                        to modify your eating habits...</p>
+                                        </div>
+                                </div>
+                        </div>
+                        <div class="col">
+                                <div class="card border-secondary mb-3" style="max-width: 20rem;">
+                                        <div class="card-header"><a class="my-2 nav-link" href="#">New Meal Diary</a>
+                                        </div>
+                                        <div class="card-body text-secondary">
+                                                <p class="card-text">Here you can create a new meal diary and check how
+                                                        much
+                                                        calories
+                                                        you have
+                                                        eaten today...</p>
+                                        </div>
+                                </div>
+                        </div>
+                        <div class="col">
+                                <div class="card border-secondary mb-3" style="max-width: 20rem;">
+                                        <div class="card-header"><a class="my-2 nav-link"
+                                                        href="user-profile/bmi-Calculator">BMI
+                                                        Calculator</a>
+                                        </div>
+                                        <div class="card-body text-secondary">
+                                                <p class="card-text">The Body Mass Index (BMI) Calculator can be used to
+                                                        calculate BMI
+                                                        value and
+                                                        corresponding weight status while taking age into consideration.
+                                                </p>
+                                        </div>
+                                </div>
+                        </div>
+                </div>
+        </div>
 </div>
-<a href="user-profile/bmi-Calculator">BMI CALCULATOR</a>
-
-
-
-
-

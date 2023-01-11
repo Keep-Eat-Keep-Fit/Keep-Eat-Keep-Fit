@@ -1,24 +1,62 @@
-<div class="bmiCalculator">
-    <h3>BMI CALCULATOR</h3>  
+<div class="text-center position-absolute top-50 start-50 translate-middle" style="width: 30%;">
+    <h3>BMI CALCULATOR</h3>
 
-
-        <label class="userAge"> Age:
-            <input type="number" name="age" value="{{age}}" required/>
-        </label>
-        <label> Gender:
-        <input type="text" name="gender" value="{{gender}}" required/>
-        </label>
-        <label class="userHeight"> Height:
-            <input type="number" name="height" value="{{height}}" required/>CM
-        </label>
-        <label class="userWeight"> Weight:
-            <input type="number" name="weight" value="{{weight}}" required/>KG
-        </label>
-        
-    <form action="/user-profile/bmi-calculator" method="post">
-        <button>Calculate</button>
-         <h2 class="bmiValue">Total: <span>{{bmiResult2}}</span></h2>
-    </form>   
-      
- 
+    <div class="mx-5 mt-5 d-flex flex-column text-center">
+        <div class="input-group flex-nowrap mb-3">
+            <span class="input-group-text col-4" id="addon-wrapping">Age :</span>
+            <input type="text" class="form-control" value="{{age}}"
+                aria-describedby="addon-wrapping" required />
+        </div>
+        <div class="input-group flex-nowrap mb-3">
+            <span class="input-group-text col-4" id="addon-wrapping">Gender :</span>
+            <input type="text" class="form-control" value="{{gender}}" 
+                aria-describedby="addon-wrapping" required />
+        </div>
+        <div class="input-group flex-nowrap mb-3">
+            <span class="input-group-text col-4" id="addon-wrapping">Height :</span>
+            <input type="number" class="form-control" value="{{height}}" 
+                aria-describedby="addon-wrapping" required />
+            <span class="input-group-text" id="basic-addon2"> C M </span>
+        </div>
+         <div class="input-group flex-nowrap mb-3">
+            <span class="input-group-text col-4" id="addon-wrapping">Weight :</span>
+            <input type="number" class="form-control" value="{{weight}}" 
+                aria-describedby="addon-wrapping" required />
+            <span class="input-group-text" id="basic-addon2"> K G </span>
+        </div>        
+        <div class="m-3">
+            <form action="/user-profile/bmi-calculator" method="post">
+                <button class="btn btn-success opacity-50 text-white px-4">Calculate</button>
+                <h2 class="bmiValue m-3">Total: <span>{{bmiResult2}}</span></h2>
+            </form>
+        </div>
+    </div>
+    <div class="ms-5">
+        <div class="progress-stacked" style="width: 100%">
+            <div class="progress" role="progressbar" aria-label="Segment one" aria-valuenow="45" aria-valuemin="0"
+                aria-valuemax="100" style="width: 45%">
+                <div class="progress-bar">18</div>
+            </div>
+            <div class="progress" role="progressbar" aria-label="Segment two" aria-valuenow="63" aria-valuemin="0"
+                aria-valuemax="100" style="width: 17.5%">
+                <div class="progress-bar bg-success">25</div>
+            </div>
+            <div class="progress" role="progressbar" aria-label="Segment three" aria-valuenow="70" aria-valuemin="0"
+                aria-valuemax="100" style="width: 7.5%">
+                <div class="progress-bar bg-info">28</div>
+            </div>
+            <div class="progress " role="progressbar" aria-label="Segment four" aria-valuenow="75" aria-valuemin="0"
+                aria-valuemax="100" style="width: 5%">
+                <div class="progress-bar bg-warning">30</div>
+            </div>
+            <div class="progress" role="progressbar" aria-label="Segment five" aria-valuenow="100" aria-valuemin="0"
+                aria-valuemax="100" style="width: 10%">
+                <div class="progress-bar bg-danger">40</div>
+            </div>            
+        </div>
+        <div>
+            <p>Healthy BMI range: 18.5 kg/m2 - 25 kg/m2<br>
+                Healthy weight for the height: 59.9 kgs - 81.0 kgs</p>
+        </div>
+    </div>
 </div>

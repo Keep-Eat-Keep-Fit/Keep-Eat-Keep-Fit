@@ -5,39 +5,44 @@
       <meta charset="UTF-8">
       <meta name="viewport" content="width=device-width, initial-scale=1.0">
       <meta http-equiv="X-UA-Compatible" content="ie=edge">
-      <title>{{appTitle}}</title>
+      <title>Keep-eat-keep-fit</title>       
       <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.0-alpha1/dist/css/bootstrap.min.css" rel="stylesheet"
-        integrity="sha384-GLhlTQ8iRABdZLl6O3oVMWSktQOp6b7In1Zl3/Jr59b6EGGoI1aFkw7cmDA6j6gD" crossorigin="anonymous">
-   
-      <link rel="stylesheet" href="/stylesheets/style.css" />
-   </head>
+        integrity="sha384-GLhlTQ8iRABdZLl6O3oVMWSktQOp6b7In1Zl3/Jr59b6EGGoI1aFkw7cmDA6j6gD" crossorigin="anonymous">  
 
-   <body>
-<header>
-         <nav>
-            
+     <link rel="stylesheet" href="/stylesheets/style.css">
+  
+
+   <body class="pb-2 position-relative" style="height: 100vh;">
+      <header class="bg-success-subtle opacity-90">
+         <nav class="container d-flex flex-column flex-md-row justify-content-end pt-3">           
       
-            <div>
+            <div class="d-flex flex-row mb-3">
                {{#if userDetails}}
-               Hello {{userDetails.username}},
+              
+               <p class="m-1 pt-2 lh-1 text-secondary">Hello {{userDetails.username}},</p>
+                <button class="m-1 ms-5 btn lh-1 btn-light"><a class="nav-link text-secondary" href="/user-profile">My Page</a></button>
+                
                <form action="/logout" method="POST">
-                  <button>Logout</button>                  
+                  <button class="m-1 ms-1 btn lh-1 btn-success opacity-50 text-white">Logout</button>
                </form>
-               <button><a href="/user-profile">My Page</a> </button>
+              
                {{else}}
-               <a href="/signup">Register</a> |
-               <a href="/login">Login</a> |
+               <a class="pb-3 d-none d-md-inline-block nav-link mx-3" href="/signup">Register</a>
+               <a class="pb-3 d-none d-md-inline-block nav-link" href="/login">Login</a> 
                {{/if}}
             </div>
          </nav>
       </header>
 
-
-
-
+   <div style="height: 81vh;" >  
       {{{body}}}
-
+   </div>
       <script src="/js/script.js"></script>
    </body>
+
+
+   <footer class="p-1 pt-3 text-center lh-5 bg-success-subtle opacity-90 text-secondary" style="height: 11vh;">     
+         <p>Created for<a href="https://www.ironhack.com/en" class="nav-link">Ironhack</a>by Shulu Yan and Xavier Chang</p>
+   </footer>
 
 </html>

@@ -1,12 +1,44 @@
-<h1>Here is your profile details</h1>
 
-
-Username: {{username}}
-Email   : {{email}}
-Age     : {{age}}   
-Gender  : {{gender}}   
-Height  : {{height}} CM
-Weight  : {{weight}} KG
+    
+<div class="text-center position-absolute top-50 start-50 translate-middle" style="width: 30%;">
+    <h3 class="m-4">Here is your profile details</h3>
    
+        <div class="m-5 d-flex flex-column text-center">
+            <div class="input-group flex-nowrap mb-3 ">
+                <span class="input-group-text col-4" id="addon-wrapping">Username :</span>
+                <input type="text" class="form-control" value="{{username}}" aria-describedby="addon-wrapping"
+                   disabled/>
+            </div>
+            <div class="input-group flex-nowrap mb-3">
+                <span class="input-group-text col-4" id="addon-wrapping">Email :</span>
+                <input type="email" class="form-control" value="{{email}}" aria-describedby="addon-wrapping" disabled />
+            </div>
+            <div class="input-group flex-nowrap mb-3">
+                <span class="input-group-text col-4" id="addon-wrapping">Age :</span>
+                <input type="text" class="form-control" value="{{age}}" aria-describedby="addon-wrapping" disabled />
+            </div>
+            <div class="input-group flex-nowrap mb-3">
+                <span class="input-group-text col-4" id="addon-wrapping">Gender :</span>
+                <input type="text" class="form-control" value="{{gender}}" aria-describedby="addon-wrapping" disabled />
+            </div>           
+            <div class="input-group flex-nowrap mb-3">
+                <span class="input-group-text col-4" id="addon-wrapping">Height :</span>
+                <input type="number" class="form-control" value="{{height}}" aria-describedby="addon-wrapping"
+                    disabled />
+                <span class="input-group-text" id="basic-addon2"> CM </span>
+            </div>
+            <div class="input-group flex-nowrap mb-3">
+                <span class="input-group-text col-4" id="addon-wrapping">Weight :</span>
+                <input type="number" class="form-control" value="{{weight}}" aria-describedby="addon-wrapping"
+                    disabled />
+                <span class="input-group-text ps-3" id="basic-addon2"> KG </span>
+            </div>
+            <div class="text-center m-4">
+                 <button class="btn btn-success col-2 lh-1 mx-3 opacity-75 text-white fs-6" style="width: 8em;"><a class="nav-link"
+                href=" /user-profile/edit">Edit</a></button>
+            </div>
+        </div>
 
-<button><a href="/user-profile/edit">Edit</a></button>
+    </form>
+
+</div>

@@ -1,13 +1,17 @@
-<h1>{{appTitle}} 🚀</h1>
-<p>Welcome Ironhacker!</p>
 
-<section>
-    <h3> Search Food:</h3>
-    <form action="/searchFood" method="GET">
-        <label>
-            Food:
-            <input type="string" name="foodName">
-        </label>
-        <button type="submit">Search</button>
-    </form>
-    <a href="/meals/create">Create meal</a>
+<main id="homepage">
+    <div class="text-center bg-light position-relative pt-1">
+        <img class="img-fluid opacity-75 d-block w-100" style="height: 80vh;" src="/images/homepage-img.png" alt="homepage"/>
+        <div class="col-md-5 p-lg-5 mx-auto my-5 carousel-caption text-center position-absolute top-50 start-50 translate-middle" id="searchFoodbar">
+            <h1 class="display-4 fw-bold mb-5 text-success text-opacity-75 position-absolute top-25 start-50 translate-middle">Search Food</h1>
+            <div class="position-absolute top-50 start-50 translate-middle my-3 pe-3 ">
+            <form class="d-flex flex-row" action="/searchFood" method="GET">                
+                <label>                    
+                    <input class="lh-lg rounded-4 text-center border border-success opacity-75 border-3 px-5 py-1 ms-5" type="string" name="foodName" placeholder="Food" />
+                </label>               
+                <button class="btn btn-success col-2 lh-1 mx-3 opacity-75 text-white fs-6" style="width: 25%;" type="submit">Search</button>               
+            </form>
+            </div>
+        </div>
+    </div>
+</main>
