@@ -1,0 +1,18 @@
+<h2>Edit the food: {{foodDetails.name}}</h2>
+
+<form action="/food/{{foodDetails._id}}/edit" method="post">
+    <label> Name:
+        <input type="text" name="name" value="{{foodDetails.name}}" />
+    </label>
+
+    <label> Energy:
+        <input type="number" name="energy" value="{{foodDetails.energy}}" />
+    </label>
+
+    <label> Image of food (url of the new food):
+        <input type="text" name="image" value="{{foodDetails.image}}" />
+    </textarea>
+    </label>
+
+    <button>Save changes</button>
+</form>
