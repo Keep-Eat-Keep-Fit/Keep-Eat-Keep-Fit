@@ -159,11 +159,11 @@ router.post("/meals/calculateCalorie", (req, res, next) => {
 //UPDATE: display form
 router.get("/meals/:mealId/edit", (req, res, next) => {
 
-    let mealArr;
+    let foodArr;
 
-    Meal.find()
-        .then( (mealFromDB) => {
-            mealArr = mealFromDB;
+    Food.find()
+        .then( (foodFromDB) => {
+            foodArr = foodFromDB;
             return Meal.findById(req.params.mealId)
         })
         .then((mealDetails) => {
@@ -180,8 +180,9 @@ router.get("/meals/:mealId/edit", (req, res, next) => {
 
             const data = {
                 mealDetails,
-                mealArr
+                foodArr
             };
+            console.log("****", foodArr);
 
             res.render("meals/meal-edit", data);
         })
@@ -192,9 +193,37 @@ router.get("/meals/:mealId/edit", (req, res, next) => {
 });
 
 //UPDATE: process form
+router.post("/meals/:mealId/edit",  (req, res, next) => {
+    const mealId = req.params.mealId;
 
+    let {
+        date, bfFood, lunchFood, dinnerFood, otherFood
+    } = req.body;
+
+    let newDetails = {date, bfFood, lunchFood, dinnerFood, otherFood}
+
+    Meal.findByIdAndUpdate(mealId, newDetails)
+        .then(() => {
+            res.redirect(`/meals`);
+        })
+        .catch(err => {
+            console.log("Error updating meal...", err);
+            next();
+        });
+});
 
 
 //DELETE
+router.post("/meals/:mealId/delete", (req, res, next) => {
+    Meal.findByIdAndDelete(req.params.mealId)
+        .then(() => {
+            res.redirect("/meals");
+        })
+        .catch(err => {
+            console.log("Error deleting meal...", err);
+            next();
+        });
+
+});
 
 module.exports = router;

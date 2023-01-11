@@ -5,15 +5,37 @@
         <input type="date" name="date" value="{{mealDetails.date}}" />
     </label>
 
-    <label> Food of Breakfast:
-        <select name="breakfastFood">
-            {{#each mealArr}}
-            <option value="{{this._id}}">{{this.name}}</option>
+    <label> Breakfast:
+        <select name="bfFood" multiple>
+            {{#each foodArr}}
+            <option value="{{_id}}">{{name}}</option>
             {{/each}}
         </select>
     </label>
 
-  
+    <label> Lunch:
+        <select name="lunchFood" multiple>
+            {{#each foodArr}}
+            <option value="{{_id}}">{{name}}</option>
+            {{/each}}
+        </select>
+    </label>
+
+    <label> Dinner:
+        <select name="dinnerFood" multiple>
+            {{#each foodArr}}
+            <option value="{{_id}}">{{name}}</option>
+            {{/each}}
+        </select>
+    </label>
+
+    <label> Other Food:
+        <select name="otherFood" multiple>
+            {{#each foodArr}}
+            <option value="{{_id}}">{{name}}</option>
+            {{/each}}
+        </select>
+    </label>
 
     <button>Save changes</button>
 </form>
