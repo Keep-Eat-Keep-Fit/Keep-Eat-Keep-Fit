@@ -73,10 +73,19 @@
                     Calories: {{totalCalories}} kcals
                  </form>
                  <br> 
+
+                
+                </form>
             {{/each}}
             <br>
             Calories: {{calories}} kcals<br>
             
+             <a href="/meals/{{_id}}/edit">Edit</a>
+
+                <form action="/meals/{{_id}}/delete" method="POST">
+                    <button>Delete</button>
         </p>
+        
+        <a class="my-2 nav-link fs-5 text-secondary" href="/user-profile">My profile</a>
     </section>
 {{/each}}

@@ -1,0 +1,19 @@
+<h2>Date of meal: {{mealDetails.date}}</h2>
+
+<form action="/meals/{{mealDetails._id}}/edit" method="post">
+    <label> Date of meal
+        <input type="date" name="date" value="{{mealDetails.date}}" />
+    </label>
+
+    <label> Food of Breakfast:
+        <select name="breakfastFood">
+            {{#each mealArr}}
+            <option value="{{this._id}}">{{this.name}}</option>
+            {{/each}}
+        </select>
+    </label>
+
+  
+
+    <button>Save changes</button>
+</form>

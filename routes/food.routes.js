@@ -11,11 +11,15 @@ const notice = () => {
 router.post("/food/create", (req, res, next) => {
    const {username} = req.session.currentUser;
    
+   const total = quantity * req.body.energy;
+
     const foodDetails = {
         userName : username,
         name: req.body.name,
+        quantity: 1,
         energy: Math.round(req.body.energy),
-        image: req.body.image 
+        image: req.body.image,
+        totalCalories: Math.round(total)
     }
     //console.log(foodDetails);
     Food.create(foodDetails)

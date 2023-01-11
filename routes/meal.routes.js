@@ -46,6 +46,7 @@ router.post("/meals/create", (req, res, next) => {
 
 //READ: List all meals
 router.get("/meals", (req, res, next) => {
+    
     const { username } = req.session.currentUser;
 
     // const {energy, quantity} = req.query
@@ -87,7 +88,7 @@ router.get("/meals", (req, res, next) => {
                     otherCalories: Math.round(sumCalOfOther),
                     calories: Math.round(totalCal),
                 }
-                console.log(newData)
+                console.log("The data is ",newData)
                 Meal.findByIdAndUpdate(e.id, newData)
                     .then(()=>console.log("update success"))
             })
@@ -112,8 +113,6 @@ router.get("/meals", (req, res, next) => {
                 mealsArrWithFormattedDate
             }
 
-            
-
             res.render("meals/meals-list", data)
         })
         .catch(err => {
@@ -136,37 +135,52 @@ router.post("/meals/calculateCalorie", (req, res, next) => {
     Food.findByIdAndUpdate(id, newData)
         .then(() => {
             console.log('update success')
-            Meal.findByIdAndUpdate()
+            res.render("meals/meals-list", newData);
             res.redirect(`/meals`)
         })
         .catch(err => {
             console.log("error update meals from DB", err);
             next(err)
         })
-    res.render("meals/meals-list", newData);
-    res.redirect("/meals")
-})
-
-//Calculate meal calorie
-router.post("/meals/calculateMealCalorie", (req, res, next) => {
-
-    const { id } = req.body;
-
-    Meal.findById(id)
-        .then(dataFromDB => {
-
-            return Food.findById('63bd4714140d718916283a4f');
-        })
-        .then((dataFromFood) => {
-            // console.log(dataFromFood);
-        })
-        .catch()
-    res.redirect("/meals")
+    
+    
 })
 
 
 //UPDATE: display form
+router.get("/meals/:mealId/edit", (req, res, next) => {
 
+    let mealArr;
+
+    Meal.find()
+        .then( (mealFromDB) => {
+            mealArr = mealFromDB;
+            return Meal.findById(req.params.mealId)
+        })
+        .then((mealDetails) => {
+                //convert mongoose document to valid js object
+                mealDetails = mealDetails.toObject();
+
+                //format date
+                const newDate = {
+                    date: dayjs(mealDetails.date).format('YYYY/MM/DD')
+                }
+
+                mealDetails.date = newDate.date;
+
+
+            const data = {
+                mealDetails,
+                mealArr
+            };
+
+            res.render("meals/meal-edit", data);
+        })
+        .catch(err => {
+            console.log("Error getting meal details from DB...", err);
+            next();
+        });
+});
 
 //UPDATE: process form
 

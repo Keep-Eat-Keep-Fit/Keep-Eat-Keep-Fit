@@ -43,7 +43,7 @@ router.get("/searchFood-toDB", (req, res, next) => {
     axios.request(options)
       .then((response) => {
         let results = response.data.hints;
-        console.log(results);
+        //console.log(results);
         res.render("search/searchFood-toDB", {foodArr: results});
       })
     .catch(function (error) {
