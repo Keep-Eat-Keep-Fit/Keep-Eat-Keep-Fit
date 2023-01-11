@@ -60,12 +60,21 @@ router.get("/meals", (req, res, next) => {
             const newDate = {
                 date: dayjs(mealsArr.date).format('YYYY/MM/DD')
             }
-            //console.log(newDate);
-            //console.log(mealsArr);
+            // console.log(newDate);
+
+            /*
+            Meal.findByIdAndUpdate
+            const data = {
+                bfCalories: sumCalOfBf
+            }
+            */
+
+            console.log(mealsArr);           
             
-            // mealsArr.forEach((e) => {
-            //     dayjs(e.date).format('DD/MM/YYYY');
+            // const newDate = mealsArr.forEach((e) => {
+            //    console.log("we need to see", dayjs(e.date).format('DD/MM/YYYY')); 
             // })
+            //console.log("we need to see",newDate);
             // console.log(mealsArr.date);
             // mealsArr.date = 
             // console.log(mealsArr.date);
@@ -79,6 +88,7 @@ router.get("/meals", (req, res, next) => {
                 }
                 return sumCalOfBf;
             })
+            console.log(sumCalOfBf);
             mealsArr.forEach((e) => {
                 for(let i=0; i<e.lunchFood.length;i++){
                     sumCalOfLunch+=e.lunchFood[i].totalCalories
