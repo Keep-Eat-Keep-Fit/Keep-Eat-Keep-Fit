@@ -55,19 +55,12 @@ router.get("/meals", (req, res, next) => {
         .populate("dinnerFood")
         .populate("otherFood")
         .then(mealsArr => {
-            
 
             mealsArr.forEach((e) => {
                 let sumCalOfBf = 0;
                 let sumCalOfLunch = 0;
                 let sumCalOfDinner = 0;
                 let sumCalOfOther = 0;
-                const newDate = {
-                    date: dayjs(e.date).format('YYYY/MM/DD')
-                }
-                
-                let renewDate = newDate.date;
-
                 
                 e.breakfastFood.forEach((e) => {
                     sumCalOfBf += e.totalCalories;
@@ -93,22 +86,34 @@ router.get("/meals", (req, res, next) => {
                     dinnerCalories: Math.round(sumCalOfDinner),
                     otherCalories: Math.round(sumCalOfOther),
                     calories: Math.round(totalCal),
-                    date: renewDate
                 }
                 console.log(newData)
                 Meal.findByIdAndUpdate(e.id, newData)
                     .then(()=>console.log("update success"))
             })
-            //console.log(mealsArr);
-            const newDate = {
-                date: dayjs(mealsArr.date).format('YYYY/MM/DD')
-            }
-            let renewDate = newDate.date;
+
+
+            const mealsArrWithFormattedDate = mealsArr.map( (meal) => {
+
+                //convert mongoose document to valid js object
+                meal = meal.toObject();
+
+                //format date
+                const newDate = {
+                    date: dayjs(meal.date).format('YYYY/MM/DD')
+                }
+
+                meal.date = newDate.date;
+
+                return meal;
+            });
 
             const data = {
-                renewDate,
-                mealsArr
+                mealsArrWithFormattedDate
             }
+
+            
+
             res.render("meals/meals-list", data)
         })
         .catch(err => {
@@ -158,8 +163,6 @@ router.post("/meals/calculateMealCalorie", (req, res, next) => {
         .catch()
     res.redirect("/meals")
 })
-
-//READ: Meal details
 
 
 //UPDATE: display form

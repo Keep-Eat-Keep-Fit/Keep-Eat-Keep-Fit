@@ -31,19 +31,18 @@ router.post("/food/create", (req, res, next) => {
 })
 
 //READ: List all food
-// router.get("/meals", (req, res, next) => {
-//     Meal.find()
-//         .populate("userName")
-//         .then(mealsFromDB => {
-//             console.log(mealsFromDB)
+router.get("/food", (req, res, next) => {
+    Food.find()
+        .then(foodFromDB => {
+            console.log(foodFromDB)
 
-//             // res.render("meals/meals-list", { meals: mealsFromDB })
-//         })
-//         .catch(err => {
-//             console.log("error getting meals from DB", err);
-//             next(err);
-//         })
-// })
+            // res.render("food/food-list", { meals: mealsFromDB })
+        })
+        .catch(err => {
+            console.log("error getting food from DB", err);
+            next(err);
+        })
+})
 
 //UPDATE: display form
 
