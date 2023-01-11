@@ -11,7 +11,7 @@ const notice = () => {
 router.post("/food/create", (req, res, next) => {
    const {username} = req.session.currentUser;
    
-   const total = quantity * req.body.energy;
+   const total = req.body.energy;
 
     const foodDetails = {
         userName : username,

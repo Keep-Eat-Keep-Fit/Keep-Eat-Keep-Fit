@@ -88,11 +88,18 @@ router.get("/meals", (req, res, next) => {
                     otherCalories: Math.round(sumCalOfOther),
                     calories: Math.round(totalCal),
                 }
-                console.log("The data is ",newData)
-                Meal.findByIdAndUpdate(e.id, newData)
-                    .then(()=>console.log("update success"))
-            })
+                console.log("1. The data is ",newData, e.id)
 
+                Meal.findByIdAndUpdate(e.id, newData)
+                    .then((mealsFromDB) => {
+                        console.log("update success")
+                        console.log("3", mealsFromDB);
+                    })
+                    .catch(err => {
+                        console.log("error getting meals from DB", err);
+                        next(err)
+                    })
+            })
 
             const mealsArrWithFormattedDate = mealsArr.map( (meal) => {
 
@@ -112,8 +119,12 @@ router.get("/meals", (req, res, next) => {
             const data = {
                 mealsArrWithFormattedDate
             }
+            console.log("************");
+            console.log("2.", mealsArr);
 
+            console.log("************");
             res.render("meals/meals-list", data)
+         
         })
         .catch(err => {
             console.log("error getting meals from DB", err);
@@ -134,9 +145,7 @@ router.post("/meals/calculateCalorie", (req, res, next) => {
 
     Food.findByIdAndUpdate(id, newData)
         .then(() => {
-            console.log('update success')
-            res.render("meals/meals-list", newData);
-            res.redirect(`/meals`)
+            res.redirect("/meals")
         })
         .catch(err => {
             console.log("error update meals from DB", err);
