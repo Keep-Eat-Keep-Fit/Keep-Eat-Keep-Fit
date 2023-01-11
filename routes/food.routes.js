@@ -10,13 +10,14 @@ const notice = () => {
 //CREATE: process
 router.post("/food/create", (req, res, next) => {
    const {username} = req.session.currentUser;
-    
+   
     const foodDetails = {
         userName : username,
         name: req.body.name,
-        energy: Math.round(req.body.energy) 
+        energy: Math.round(req.body.energy),
+        image: req.body.image 
     }
-    console.log(foodDetails);
+    //console.log(foodDetails);
     Food.create(foodDetails)
         .then(foodDetails => {
             console.log(foodDetails);
@@ -36,7 +37,7 @@ router.get("/food", (req, res, next) => {
         .then(foodFromDB => {
             console.log(foodFromDB)
 
-            // res.render("food/food-list", { meals: mealsFromDB })
+            res.render("food/food-list", {foodFromDB})
         })
         .catch(err => {
             console.log("error getting food from DB", err);

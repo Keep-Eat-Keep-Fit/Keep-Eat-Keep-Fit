@@ -21,6 +21,10 @@ const foodSchema = new Schema(
         totalCalories: {
             type: Number,
             required: false
+        },
+        image: {
+            type: String,
+            require: false
         }
     },
     {

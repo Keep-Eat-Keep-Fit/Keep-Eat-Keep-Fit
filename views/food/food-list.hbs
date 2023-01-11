@@ -1,0 +1,10 @@
+h1>Food in your DB</h1>
+ 
+{{#each foodFromDB}}
+    <section class="food-detail">
+        
+        <h2>Food name: {{name}}</h2>
+        <img src="{{image}}" alt="No image provided">
+        <p>Energy: {{energy}} kcals</p>
+    </section>
+{{/each}}
