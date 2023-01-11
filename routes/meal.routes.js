@@ -55,16 +55,18 @@ router.get("/meals", (req, res, next) => {
         .populate("dinnerFood")
         .populate("otherFood")
         .then(mealsArr => {
-            const newDate = {
-                date: dayjs(mealsArr.date).format('YYYY/MM/DD')
-            }
-            console.log(newDate);
             
+
             mealsArr.forEach((e) => {
                 let sumCalOfBf = 0;
                 let sumCalOfLunch = 0;
                 let sumCalOfDinner = 0;
                 let sumCalOfOther = 0;
+                const newDate = {
+                    date: dayjs(e.date).format('YYYY/MM/DD')
+                }
+                
+                let renewDate = newDate.date;
 
                 
                 e.breakfastFood.forEach((e) => {
@@ -86,20 +88,26 @@ router.get("/meals", (req, res, next) => {
                 let totalCal = sumCalOfBf + sumCalOfLunch + sumCalOfDinner + sumCalOfOther;
 
                 const newData = {
-                    bfCalories: sumCalOfBf,
-                    lunchCalories: sumCalOfLunch,
-                    dinnerCalories: sumCalOfDinner,
-                    otherCalories: sumCalOfOther,
-                    calories: totalCal
+                    bfCalories: Math.round(sumCalOfBf),
+                    lunchCalories: Math.round(sumCalOfLunch),
+                    dinnerCalories: Math.round(sumCalOfDinner),
+                    otherCalories: Math.round(sumCalOfOther),
+                    calories: Math.round(totalCal),
+                    date: renewDate
                 }
-                // console.log(newData)
+                console.log(newData)
                 Meal.findByIdAndUpdate(e.id, newData)
                     .then(()=>console.log("update success"))
             })
-            console.log(mealsArr);
+            //console.log(mealsArr);
+            const newDate = {
+                date: dayjs(mealsArr.date).format('YYYY/MM/DD')
+            }
+            let renewDate = newDate.date;
+
             const data = {
-                mealsArr,
-                newDate
+                renewDate,
+                mealsArr
             }
             res.render("meals/meals-list", data)
         })
