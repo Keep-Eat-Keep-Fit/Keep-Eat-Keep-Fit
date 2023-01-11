@@ -6,7 +6,7 @@
         <h2>Date of meal: {{../newDate.date}}</h2>
         <p>
             Food of Breakfast:
-            Calories of Breakfast: {{../sumCalOfBf}} kcals
+            Calories of Breakfast: {{bfCalories}} kcals
             <br>
            
             {{#each this.breakfastFood}}
@@ -24,7 +24,7 @@
             {{/each}}
             <br>           
             Food of Lunch: 
-            Calories of Breakfast: {{../sumCalOfLunch}} kcals
+            Calories of Breakfast: {{lunchCalories}} kcals
             <br>
             {{#each this.lunchFood}}
                 <br>
@@ -41,7 +41,7 @@
             {{/each}}
             <br>
             Food of Dinner:
-            Calories of Dinner: {{../sumCalOfDinner}} kcals
+            Calories of Dinner: {{dinnerCalories}} kcals
             <br>
             {{#each this.dinnerFood}}
                  <br>
@@ -59,7 +59,7 @@
             {{/each}}
             <br>
             This day I also ate: 
-            Calories of Other food: {{../sumCalOfOther}} kcals
+            Calories of Other food: {{otherCalories}} kcals
             <br>
             {{#each this.otherFood}}
                 <br>
@@ -75,7 +75,7 @@
                  <br> 
             {{/each}}
             <br>
-            Calories: {{../totalCal}} kcals<br>
+            Calories: {{calories}} kcals<br>
             
         </p>
     </section>

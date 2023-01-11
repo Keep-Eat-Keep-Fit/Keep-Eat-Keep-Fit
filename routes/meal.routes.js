@@ -7,34 +7,34 @@ const dayjs = require('dayjs')
 
 //CREATE: display form
 router.get("/meals/create", (req, res, next) => {
-    const {username} = req.session.currentUser;
-    Food.find({userName: username})
+    const { username } = req.session.currentUser;
+    Food.find({ userName: username })
         .then((foodArr) => {
             const data = {
                 username,
                 foodArr
             }
             res.render("meals/meal-create", data)
-    })
-    .catch(err => {
-        console.log("error getting food from DB", err);
-        next(err);
-    })
+        })
+        .catch(err => {
+            console.log("error getting food from DB", err);
+            next(err);
+        })
 
 
-    
+
 })
 
 //CREATE: process form
 router.post("/meals/create", (req, res, next) => {
-    let { 
+    let {
         userName, date, breakfastFood, lunchFood, dinnerFood, otherFood, calories
     } = req.body;
-    
-    let mealDetails = { userName, date, breakfastFood, lunchFood, dinnerFood, otherFood, calories}
+
+    let mealDetails = { userName, date, breakfastFood, lunchFood, dinnerFood, otherFood, calories }
 
     Meal.create(mealDetails)
-        .then(mealDetails => {   
+        .then(mealDetails => {
             console.log("create success");
             res.redirect("/meals")
         })
@@ -46,96 +46,73 @@ router.post("/meals/create", (req, res, next) => {
 
 //READ: List all meals
 router.get("/meals", (req, res, next) => {
-    const {username} = req.session.currentUser;
+    const { username } = req.session.currentUser;
 
     // const {energy, quantity} = req.query
-    let mealsArr;
-    Meal.find({userName: username})
+    Meal.find({ userName: username })
         .populate("breakfastFood")
         .populate("lunchFood")
         .populate("dinnerFood")
         .populate("otherFood")
         .then(mealsArr => {
-            //can't change DB --> ask for help
             const newDate = {
                 date: dayjs(mealsArr.date).format('YYYY/MM/DD')
             }
-            // console.log(newDate);
-
-            /*
-            Meal.findByIdAndUpdate
-            const data = {
-                bfCalories: sumCalOfBf
-            }
-            */
-
-            console.log(mealsArr);           
+            console.log(newDate);
             
-            // const newDate = mealsArr.forEach((e) => {
-            //    console.log("we need to see", dayjs(e.date).format('DD/MM/YYYY')); 
-            // })
-            //console.log("we need to see",newDate);
-            // console.log(mealsArr.date);
-            // mealsArr.date = 
-            // console.log(mealsArr.date);
-            let sumCalOfBf = 0;
-            let sumCalOfLunch = 0;
-            let sumCalOfDinner = 0;
-            let sumCalOfOther = 0;
             mealsArr.forEach((e) => {
-                for(let i=0; i<e.breakfastFood.length;i++){
-                    sumCalOfBf+=e.breakfastFood[i].totalCalories
+                let sumCalOfBf = 0;
+                let sumCalOfLunch = 0;
+                let sumCalOfDinner = 0;
+                let sumCalOfOther = 0;
+
+                
+                e.breakfastFood.forEach((e) => {
+                    sumCalOfBf += e.totalCalories;
+                })
+
+                e.lunchFood.forEach((e) => {
+                    sumCalOfLunch += e.totalCalories;
+                })
+
+                e.dinnerFood.forEach((e) => {
+                    sumCalOfDinner += e.totalCalories;
+                })
+                
+                e.otherFood.forEach((e) => {
+                    sumCalOfOther += e.totalCalories;
+                })
+
+                let totalCal = sumCalOfBf + sumCalOfLunch + sumCalOfDinner + sumCalOfOther;
+
+                const newData = {
+                    bfCalories: sumCalOfBf,
+                    lunchCalories: sumCalOfLunch,
+                    dinnerCalories: sumCalOfDinner,
+                    otherCalories: sumCalOfOther,
+                    calories: totalCal
                 }
-                return sumCalOfBf;
+                // console.log(newData)
+                Meal.findByIdAndUpdate(e.id, newData)
+                    .then(()=>console.log("update success"))
             })
-            console.log(sumCalOfBf);
-            mealsArr.forEach((e) => {
-                for(let i=0; i<e.lunchFood.length;i++){
-                    sumCalOfLunch+=e.lunchFood[i].totalCalories
-                }
-                return sumCalOfLunch;
-            })
-            mealsArr.forEach((e) => {
-                for(let i=0; i<e.dinnerFood.length;i++){
-                    sumCalOfDinner+=e.dinnerFood[i].totalCalories
-                }
-                return sumCalOfDinner;
-            })
-            mealsArr.forEach((e) => {
-                for(let i=0; i<e.otherFood.length;i++){
-                    sumCalOfOther+=e.otherFood[i].totalCalories
-                }
-                return sumCalOfOther;
-            })
-            let totalCal = sumCalOfBf + sumCalOfLunch + sumCalOfDinner + sumCalOfOther;
-                            
+            console.log(mealsArr);
             const data = {
-                sumCalOfBf,
-                sumCalOfLunch,
-                sumCalOfDinner,
-                sumCalOfOther,
-                totalCal,
-                newDate,
-                mealsArr 
+                mealsArr,
+                newDate
             }
-            //console.log(data);
-           res.render("meals/meals-list", data)
+            res.render("meals/meals-list", data)
         })
-        
-       
         .catch(err => {
             console.log("error getting meals from DB", err);
             next(err);
         })
-
-    
-
 })
 
 //Calculate Food Calorie
 router.post("/meals/calculateCalorie", (req, res, next) => {
-    
-    const {energy, quantity, id} = req.body;
+
+    const { energy, quantity, id } = req.body;
     const calories = energy * quantity;
     const newData = {
         quantity: quantity,
@@ -159,17 +136,17 @@ router.post("/meals/calculateCalorie", (req, res, next) => {
 
 //Calculate meal calorie
 router.post("/meals/calculateMealCalorie", (req, res, next) => {
-    
-    const {id} = req.body;
-  
-    Meal.findById(id)
-        .then( dataFromDB => {
 
-            return Food.findById( '63bd4714140d718916283a4f');
+    const { id } = req.body;
+
+    Meal.findById(id)
+        .then(dataFromDB => {
+
+            return Food.findById('63bd4714140d718916283a4f');
         })
-        .then((dataFromFood) =>{
+        .then((dataFromFood) => {
             // console.log(dataFromFood);
-        })  
+        })
         .catch()
     res.redirect("/meals")
 })
