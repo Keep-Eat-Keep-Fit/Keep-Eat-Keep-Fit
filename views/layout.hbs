@@ -14,23 +14,24 @@
 
 <body class="pb-2 position-relative" style="height: 100%;">
    <header class="bg-success-subtle opacity-90">
-      <nav class="container d-flex flex-column flex-md-row justify-content-end pt-3">
-
+      <nav class="container d-flex flex-column flex-md-row justify-content-end pt-3" style="height: 8vh;">
+         
          <div class="d-flex flex-row mb-3">
             {{#if userDetails}}
-
+      
             <p class="m-1 pt-2 lh-1 text-secondary">Hello {{userDetails.username}},</p>
-            <button class="m-1 ms-5 btn lh-1 btn-light"><a class="nav-link text-secondary" href="/user-profile">My
+            <button class="m-1 ms-5 btn lh-1 btn-light py-0" style="height: 3.3vh;"><a class="nav-link text-secondary" href="/user-profile">My
                   Page</a></button>
-
+      
             <form action="/logout" method="POST">
                <button class="m-1 ms-1 btn lh-1 btn-success opacity-50 text-white">Logout</button>
             </form>
-
+      
             {{else}}
-            <a class="pb-3 d-none d-md-inline-block nav-link mx-3" href="/signup">Register</a>
-            <a class="pb-3 d-none d-md-inline-block nav-link" href="/login">Login</a>
+            <button class="m-1 ms-1 btn lh-1 btn-success opacity-50 text-white" style="height: 3.3vh;"><a class="nav-link" href="/signup">Register</a></button>
+            <button class="m-1 ms-1 btn lh-1 btn-success opacity-50 text-white" style="height: 3.3vh;"><a class="nav-link" href="/login">Login</a></button>
             {{/if}}
+            <button class="m-1 ms-1 btn lh-1 btn-success opacity-50 text-white" style="height: 3.3vh;"><a class="nav-link" href="/">Home</a></button>
          </div>
       </nav>
    </header>
