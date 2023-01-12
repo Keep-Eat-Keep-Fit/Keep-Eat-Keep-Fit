@@ -13,13 +13,10 @@
                  <br>
                  {{name}} |
                  Energy: {{energy}} kcals |
-                 <form action="/meals/calculateCalorie" method="post">
-                    Pieces: <input type="number" step="0.1" value="{{quantity}}" min="0" name="quantity" required> |
-                    <input type="number" value="{{energy}}" name="energy" hidden>
-                    <input type="string" value="{{_id}}" name="id" hidden>
-                    <button type="submit">Confirm</button>
-                    Calories: {{totalCalories}} kcals
-                 </form>
+                 <br>
+                 Pieces: {{quantity}} |
+                 <br>
+                 Calories: {{totalCalories}} kcals
                  <br> 
             {{/each}}
             <br>           
@@ -30,13 +27,10 @@
                 <br>
                  {{name}} |
                  Energy: {{energy}} kcals |
-                 <form action="/meals/calculateCalorie" method="post">
-                    Pieces: <input type="number" step="0.1" value="{{quantity}}" min="0" name="quantity" required> |
-                    <input type="number" value="{{energy}}" name="energy" hidden>
-                    <input type="string" value="{{_id}}" name="id" hidden>
-                    <button type="submit">Confirm</button>
-                    Calories: {{totalCalories}} kcals
-                 </form>
+                 <br>
+                 Pieces: {{quantity}} |
+                 <br>
+                 Calories: {{totalCalories}} kcals
                  <br> 
             {{/each}}
             <br>
@@ -47,14 +41,10 @@
                  <br>
                  {{name}} |
                  Energy: {{energy}} kcals |
-                 <form action="/meals/calculateCalorie" method="post">
-                    Pieces: <input type="number" step="0.1" value="{{quantity}}" min="0" name="quantity" required> |
-                    <input type="number" value="{{energy}}" name="energy" hidden>
-                    <input type="string" value="{{_id}}" name="id" hidden>
-                    <input type="number" value="{{totalCalories}}" hidden>
-                    <button type="submit">Confirm</button>
-                    Calories: {{totalCalories}} kcals
-                 </form>
+                 <br>
+                 Pieces: {{quantity}} |
+                 <br>
+                 Calories: {{totalCalories}} kcals
                  <br> 
             {{/each}}
             <br>
@@ -65,17 +55,11 @@
                 <br>
                  {{name}} |
                  Energy: {{energy}} kcals |
-                 <form action="/meals/calculateCalorie" method="post">
-                    Pieces: <input type="number" step="0.1" value="{{quantity}}" min="0" name="quantity" required> |
-                    <input type="number" value="{{energy}}" name="energy" hidden>
-                    <input type="string" value="{{_id}}" name="id" hidden>
-                    <button type="submit">Confirm</button>
-                    Calories: {{totalCalories}} kcals
-                 </form>
+                 <br>
+                 Pieces: {{quantity}} |
+                 <br>
+                 Calories: {{totalCalories}} kcals
                  <br> 
-
-                
-                </form>
             {{/each}}
             <br>
             Calories: {{calories}} kcals<br>
