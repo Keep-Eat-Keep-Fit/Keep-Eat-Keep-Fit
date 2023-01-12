@@ -22,9 +22,6 @@ router.get("/meals/create", isLoggedIn, (req, res, next) => {
             console.log("error getting food from DB", err);
             next(err);
         })
-
-
-
 })
 
 //CREATE: process form
@@ -33,7 +30,7 @@ router.post("/meals/create", isLoggedIn, (req, res, next) => {
         userName, date, breakfastFood, lunchFood, dinnerFood, otherFood
     } = req.body;
 
-    let mealDetails = { userName, date, breakfastFood, lunchFood, dinnerFood, otherFood, calories:0 }
+    let mealDetails = { userName, date, breakfastFood, lunchFood, dinnerFood, otherFood }
 
 
     Meal.create(mealDetails)

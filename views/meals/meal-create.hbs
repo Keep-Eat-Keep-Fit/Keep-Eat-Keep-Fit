@@ -25,37 +25,39 @@
         </div>
         <div class="ms-4 pb-5 position-absolute start-50">
             <label> Date:
-                <input name="date" type="date" />            
+                <input name="date" type="date" required/>            
             </label>
         </div>
         <div class="row row-cols-2 row-cols-md-1 ms-5 ps-5 mt-3">
-            <div class="m-5" style="width: 30%;">
+            <div class="m-4" style="width: 30%;">
+                <br>
+                <p>Food of Breakfast:</p>
                 <select name="breakfastFood" class="form-select" multiple aria-label="multiple select example">
-                    <option selected>Food of Breakfast:</option>
                     {{#each foodArr}} 
                     <option value="{{this._id}}">{{this.name}}</option>
                     {{/each}}
                 </select>
             </div>
-            <div class="m-5" style="width: 30%;">
+            <div class="m-4" style="width: 30%;">
+                <br>
+                <p>Food of Lunch:</p>
                 <select name="lunchFood" class="form-select" multiple aria-label="multiple select example">
-                    <option selected>Food of Lunch:</option>
                     {{#each foodArr}}
                     <option value="{{this._id}}">{{this.name}}</option>
                     {{/each}}
                 </select>
             </div>
-            <div class="m-5" style="width: 30%;">
+            <div class="m-4" style="width: 30%;">
+                <p>Food of Dinner:</p>
                 <select name="dinnerFood" class="form-select" multiple aria-label="multiple select example">
-                    <option selected>Food of Dinner:</option>
                     {{#each foodArr}}
                     <option value="{{this._id}}">{{this.name}}</option>
                     {{/each}}
                 </select>
             </div>
-            <div class="m-5" style="width: 30%;">
+            <div class="m-4" style="width: 30%;">
+                <p>OtherFood:</p>
                 <select name="otherFood" class="form-select" multiple aria-label="multiple select example">
-                    <option selected>otherFood:</option>
                     {{#each foodArr}}
                     <option value="{{this._id}}">{{this.name}}</option>
                     {{/each}}
