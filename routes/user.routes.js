@@ -27,16 +27,15 @@ router.get("/user-profile/edit", isLoggedIn, (req, res) =>{
 
 //user-information UPDATE (add the rest of the infomation we have mentioned in User-model )
 router.post("/user-profile/edit",isLoggedIn, (req, res, next) =>{
-   const {photo, age, gender, height, weight} = req.body;   
+   const {age, gender, height, weight} = req.body;    
    const userId = req.session.currentUser._id;   
-   updatedData = {
-    photo,   
+   updatedData = {   
     age,
     gender,
     height,
     weight
    }
-   User.findByIdAndUpdate(userId, updatedData)
+   User.findByIdAndUpdate(userId, updatedData,{new:true})
       .then(() =>{       
         res.redirect("/user-profile")
       })

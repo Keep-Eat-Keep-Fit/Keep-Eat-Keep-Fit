@@ -14,30 +14,29 @@
             </div>
             <div class="input-group flex-nowrap mb-3">
                 <span class="input-group-text col-4" id="addon-wrapping">Age :</span>
-                <input type="number" class="form-control" value="{{age}}" aria-describedby="addon-wrapping" required />
+                <input type="number" name="age" class="form-control" value="{{age}}" aria-describedby="addon-wrapping" required />
             </div>
             <div class="input-group flex-nowrap mb-3">
                 <span class="input-group-text col-4" id="addon-wrapping">Gender :</span>
                 <select class="form-select" name="gender">
-
                     <option value="male">Male</option>
                     <option value="female">Female</option>
                 </select>
             </div>
             <div class="input-group flex-nowrap mb-3">
                 <span class="input-group-text col-4" id="addon-wrapping">Height :</span>
-                <input type="number" class="form-control" value="{{height}}" aria-describedby="addon-wrapping"
+                <input type="number" name="height" class="form-control" value="{{height}}" aria-describedby="addon-wrapping"
                     required />
                 <span class="input-group-text" id="basic-addon2"> CM </span>
             </div>
             <div class="input-group flex-nowrap mb-3">
                 <span class="input-group-text col-4" id="addon-wrapping">Weight :</span>
-                <input type="number" class="form-control" value="{{weight}}" aria-describedby="addon-wrapping"
+                <input type="number" name="weight" class="form-control" value="{{weight}}" aria-describedby="addon-wrapping"
                     required />
                 <span class="input-group-text ps-3" id="basic-addon2"> KG </span>
             </div>
             <div class="text-center m-4">
-                <button class="btn btn-secondary col-4">submit</button>
+                <button class="btn btn-secondary col-4" type="submit">submit</button>
             </div>
         </div>
     </form>
