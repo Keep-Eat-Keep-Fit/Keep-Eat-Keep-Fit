@@ -18,8 +18,7 @@ router.get("/searchFood", (req, res, next) => {
 
       axios.request(options)
         .then((response) => {
-          let results = response.data.hints;
-          console.log(results);
+          let results = response.data.hints;          
           res.render("search/searchFood-result", {foodArr: results});
         })
       .catch(function (error) {
@@ -27,29 +26,29 @@ router.get("/searchFood", (req, res, next) => {
     });
 })
 
-router.get("/searchFood-toDB", (req, res, next) => {
-  let foodName = req.query.foodName;
+// router.get("/searchFood-toDB", (req, res, next) => {
+//   let foodName = req.query.foodName;
   
-  const options = {
-      method: 'GET',
-      url: baseURL,
-      params: {ingr: foodName}, 
-      headers: {
-        'X-RapidAPI-Key': process.env.CLIENT_KEY,
-        'X-RapidAPI-Host': process.env.CLIENT_HOST
-      }
-    };
+//   const options = {
+//       method: 'GET',
+//       url: baseURL,
+//       params: {ingr: foodName}, 
+//       headers: {
+//         'X-RapidAPI-Key': process.env.CLIENT_KEY,
+//         'X-RapidAPI-Host': process.env.CLIENT_HOST
+//       }
+//     };
 
-    axios.request(options)
-      .then((response) => {
-        let results = response.data.hints;
-        console.log(results);
-        res.render("search/searchFood-toDB", {foodArr: results});
-      })
-    .catch(function (error) {
-        console.error(error);
-  });
-})
+//     axios.request(options)
+//       .then((response) => {
+//         let results = response.data.hints;
+//         console.log(results);
+//         res.render("search/searchFood-result", {foodArr: results});
+//       })
+//     .catch(function (error) {
+//         console.error(error);
+//   });
+// })
 
 
 
