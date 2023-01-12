@@ -33,7 +33,7 @@ router.post("/food/create", isLoggedIn, (req, res, next) => {
 })
 
 //READ: List all food
-router.get("/food", (req, res, next) => {
+router.get("/food", isLoggedIn, (req, res, next) => {
     Food.find()
         .then(foodFromDB => {
             res.render("food/food-list", {foodFromDB})
@@ -45,7 +45,7 @@ router.get("/food", (req, res, next) => {
 })
 
 //UPDATE: display form
-router.get("/food/:foodId/edit", (req, res, next) => {
+router.get("/food/:foodId/edit", isLoggedIn, (req, res, next) => {
 
     let foodArr;
 
@@ -70,7 +70,7 @@ router.get("/food/:foodId/edit", (req, res, next) => {
 });
 
 //UPDATE: process form
-router.post("/food/:foodId/edit",  (req, res, next) => {
+router.post("/food/:foodId/edit", isLoggedIn, (req, res, next) => {
     const foodId = req.params.foodId;
 
     const newDetails = {
@@ -91,7 +91,7 @@ router.post("/food/:foodId/edit",  (req, res, next) => {
 
 
 //DELETE
-router.post("/food/:foodId/delete", (req, res, next) => {
+router.post("/food/:foodId/delete", isLoggedIn, (req, res, next) => {
     Food.findByIdAndDelete(req.params.foodId)
         .then(() => {
             res.redirect("/food");

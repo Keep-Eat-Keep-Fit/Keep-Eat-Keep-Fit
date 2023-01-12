@@ -2,11 +2,13 @@ const User = require("../models/User.model");
 const Meal = require("../models/Meal.model");
 const Food = require("../models/Food.model");
 const express = require('express');
+const isLoggedIn = require("../middleware/isLoggeIn");
 const router = express.Router();
-const dayjs = require('dayjs')
+const dayjs = require('dayjs');
+
 
 //CREATE: display form
-router.get("/meals/create", (req, res, next) => {
+router.get("/meals/create", isLoggedIn, (req, res, next) => {
     const { username } = req.session.currentUser;
     Food.find({ userName: username })
         .then((foodArr) => {
@@ -26,7 +28,7 @@ router.get("/meals/create", (req, res, next) => {
 })
 
 //CREATE: process form
-router.post("/meals/create", (req, res, next) => {
+router.post("/meals/create", isLoggedIn, (req, res, next) => {
     let {
         userName, date, breakfastFood, lunchFood, dinnerFood, otherFood
     } = req.body;
@@ -46,7 +48,7 @@ router.post("/meals/create", (req, res, next) => {
 })
 
 //READ: List all meals
-router.get("/meals", (req, res, next) => {
+router.get("/meals", isLoggedIn, (req, res, next) => {
     
     const { username } = req.session.currentUser;
 
@@ -88,7 +90,7 @@ router.get("/meals", (req, res, next) => {
 
 
 //UPDATE Food: display form
-router.get("/meals/:mealId/editfood", (req, res, next) => {
+router.get("/meals/:mealId/editfood", isLoggedIn, (req, res, next) => {
 
     let foodArr;
 
@@ -123,7 +125,7 @@ router.get("/meals/:mealId/editfood", (req, res, next) => {
 });
 
 //UPDATE Food: process form
-router.post("/meals/:mealId/editfood",  (req, res, next) => {
+router.post("/meals/:mealId/editfood", isLoggedIn, (req, res, next) => {
     const mealId = req.params.mealId;
 
     let {
@@ -143,7 +145,7 @@ router.post("/meals/:mealId/editfood",  (req, res, next) => {
 });
 
 //UPDATE quantity: display form
-router.get("/meals/:mealId/editquantity", (req, res, next) => { 
+router.get("/meals/:mealId/editquantity", isLoggedIn, (req, res, next) => { 
     let mealId = req.params.mealId
     Meal.findById(req.params.mealId)
         .populate("breakfastFood lunchFood dinnerFood otherFood")
@@ -169,7 +171,7 @@ router.get("/meals/:mealId/editquantity", (req, res, next) => {
 });
 
 //UPDATE quantity: process form
-router.post("/meals/:mealId/editquantity",  (req, res, next) => {
+router.post("/meals/:mealId/editquantity", isLoggedIn, (req, res, next) => {
     const mealId = req.params.mealId;
     console.log('entered in the route')
     
@@ -236,7 +238,7 @@ router.post("/meals/:mealId/editquantity",  (req, res, next) => {
 })
    
 //DELETE
-router.post("/meals/:mealId/delete", (req, res, next) => {
+router.post("/meals/:mealId/delete", isLoggedIn, (req, res, next) => {
     Meal.findByIdAndDelete(req.params.mealId)
         .then(() => {
             res.redirect("/meals");
