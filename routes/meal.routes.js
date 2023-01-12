@@ -90,7 +90,7 @@ router.get("/meals", (req, res, next) => {
 
 
 //UPDATE Food: display form
-router.get("/meals/:mealId/edit", (req, res, next) => {
+router.get("/meals/:mealId/editfood", (req, res, next) => {
 
     let foodArr;
 
@@ -117,7 +117,7 @@ router.get("/meals/:mealId/edit", (req, res, next) => {
             };
             console.log("****", foodArr);
 
-            res.render("meals/meal-edit", data);
+            res.render("meals/meal-edit-food", data);
         })
         .catch(err => {
             console.log("Error getting meal details from DB...", err);
@@ -126,7 +126,7 @@ router.get("/meals/:mealId/edit", (req, res, next) => {
 });
 
 //UPDATE Food: process form
-router.post("/meals/:mealId/edit",  (req, res, next) => {
+router.post("/meals/:mealId/editfood",  (req, res, next) => {
     const mealId = req.params.mealId;
 
     let {
