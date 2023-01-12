@@ -15,23 +15,27 @@
 <body class="pb-2 position-relative" style="height: 100%;">
    <header class="bg-success-subtle opacity-90">
       <nav class="container d-flex flex-column flex-md-row justify-content-end pt-3" style="height: 8vh;">
-         
+
          <div class="d-flex flex-row mb-3">
             {{#if userDetails}}
-      
+
             <p class="m-1 pt-2 lh-1 text-secondary">Hello {{userDetails.username}},</p>
-            <button class="m-1 ms-5 btn lh-1 btn-light py-0" style="height: 3.3vh;"><a class="nav-link text-secondary" href="/user-profile">My
+            <button class="m-1 ms-5 btn lh-1 btn-light py-0" style="height: 3.3vh;"><a class="nav-link text-secondary"
+                  href="/user-profile">My
                   Page</a></button>
-      
+
             <form action="/logout" method="POST">
                <button class="m-1 ms-1 btn lh-1 btn-success opacity-50 text-white">Logout</button>
             </form>
-      
+
             {{else}}
-            <button class="m-1 ms-1 btn lh-1 btn-success opacity-50 text-white" style="height: 3.3vh;"><a class="nav-link" href="/signup">Register</a></button>
-            <button class="m-1 ms-1 btn lh-1 btn-success opacity-50 text-white" style="height: 3.3vh;"><a class="nav-link" href="/login">Login</a></button>
+            <button class="m-1 ms-1 btn lh-1 btn-success opacity-50 text-white" style="height: 3.3vh;"><a
+                  class="nav-link" href="/signup">Register</a></button>
+            <button class="m-1 ms-1 btn lh-1 btn-success opacity-50 text-white" style="height: 3.3vh;"><a
+                  class="nav-link" href="/login">Login</a></button>
             {{/if}}
-            <button class="m-1 ms-1 btn lh-1 btn-success opacity-50 text-white" style="height: 3.3vh;"><a class="nav-link" href="/">Home</a></button>
+            <button class="m-1 ms-1 btn lh-1 btn-success opacity-50 text-white" style="height: 3.3vh;"><a
+                  class="nav-link" href="/">Home</a></button>
          </div>
       </nav>
    </header>
@@ -39,13 +43,14 @@
    <div style="height: 81vh;">
       {{{body}}}
    </div>
-   <script src="/js/script.js"></script>
+   <div class="container-fluid position-fixed bottom-0 bg-success-subtle opacity-90">
+      <footer class="p-1 pt-3 text-center lh-5 text-secondary" style="height: 11vh;">
+         <p>Created for<a href="https://www.ironhack.com/en" class="nav-link">Ironhack</a>by Shulu Yan and Xavier Chang
+         </p>
+      </footer>
+   </div>
 </body>
 
-<div class="container-fluid position-fixed bottom-0 bg-success-subtle opacity-90">
-   <footer class="p-1 pt-3 text-center lh-5 text-secondary" style="height: 11vh;">
-      <p>Created for<a href="https://www.ironhack.com/en" class="nav-link">Ironhack</a>by Shulu Yan and Xavier Chang</p>
-   </footer>
-</div>
+
 
 </html>

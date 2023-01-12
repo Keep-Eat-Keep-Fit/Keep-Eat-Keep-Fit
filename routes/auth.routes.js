@@ -91,8 +91,7 @@ router.post("/login", (req, res, next) => {
 });
 
 //User Profile
-router.get("/user-profile", (req, res) => {
-    //console.log(req.session.currentUser);
+router.get("/user-profile", (req, res) => {    
     res.render("users/user-profile", {userInsession: req.session.currentUser});    
 });
 
