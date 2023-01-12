@@ -10,49 +10,98 @@ const notice = () => {
 //CREATE: process
 router.post("/food/create", isLoggedIn, (req, res, next) => {
    const {username} = req.session.currentUser;
-    
+   
+   const total = req.body.energy;
+
     const foodDetails = {
         userName : username,
         name: req.body.name,
-        energy: Math.round(req.body.energy) 
+        quantity: 1,
+        energy: Math.round(req.body.energy),
+        image: req.body.image,
+        totalCalories: Math.round(total)
     }
-    console.log(foodDetails);
+    //console.log(foodDetails);
     Food.create(foodDetails)
         .then(foodDetails => {
-            console.log(foodDetails);
             res.redirect("/meals/create")
         })
         .catch(err => {
             console.log("error creating food from DB", err);
-            //show notice that it has been added
-            // notice();
             next();
         })
 })
 
 //READ: List all food
-// router.get("/meals", (req, res, next) => {
-//     Meal.find()
-//         .populate("userName")
-//         .then(mealsFromDB => {
-//             console.log(mealsFromDB)
-
-//             // res.render("meals/meals-list", { meals: mealsFromDB })
-//         })
-//         .catch(err => {
-//             console.log("error getting meals from DB", err);
-//             next(err);
-//         })
-// })
+router.get("/food", isLoggedIn, (req, res, next) => {
+    Food.find()
+        .then(foodFromDB => {
+            res.render("food/food-list", {foodFromDB})
+        })
+        .catch(err => {
+            console.log("error getting food from DB", err);
+            next(err);
+        })
+})
 
 //UPDATE: display form
+router.get("/food/:foodId/edit", isLoggedIn, (req, res, next) => {
 
+    let foodArr;
+
+    Food.find()
+        .then( (foodFromDB) => {
+            foodArr = foodFromDB;
+            return Food.findById(req.params.foodId)
+        })
+        .then((foodDetails) => {
+
+            const data = {
+                foodDetails,
+                foodArr
+            };
+
+            res.render("food/food-edit", data);
+        })
+        .catch(err => {
+            console.log("Error getting food details from DB...", err);
+            next();
+        });
+});
 
 //UPDATE: process form
+router.post("/food/:foodId/edit", isLoggedIn, (req, res, next) => {
+    const foodId = req.params.foodId;
 
+    const newDetails = {
+        name: req.body.name,
+        energy: req.body.energy,
+        image: req.body.image,
+    }
+
+    Food.findByIdAndUpdate(foodId, newDetails)
+        .then(() => {
+            res.redirect(`/food`);
+        })
+        .catch(err => {
+            console.log("Error updating food...", err);
+            next();
+        });
+});
 
 
 //DELETE
+router.post("/food/:foodId/delete", isLoggedIn, (req, res, next) => {
+    Food.findByIdAndDelete(req.params.foodId)
+        .then(() => {
+            res.redirect("/food");
+        })
+        .catch(err => {
+            console.log("Error deleting food...", err);
+            next();
+        });
+
+});
 
 
 module.exports = router;

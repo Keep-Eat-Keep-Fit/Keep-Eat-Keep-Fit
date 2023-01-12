@@ -28,7 +28,7 @@ const mealSchema = new Schema(
     },
     dinnerFood: [{
         type: mongoose.Schema.Types.ObjectId,
-        ref: "Food" 
+        ref: "Food",
     }],
     dinnerCalories: {
         type: Number,
