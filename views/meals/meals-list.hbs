@@ -1,112 +1,79 @@
-<h1 class="m-4 text-center">History Review</h1>
-<br />
+<h1 class="m-4 text-center display-4 text-primary">History Review</h1>
+
 {{#if mealsArrWithFormattedDate}}
 {{#each mealsArrWithFormattedDate}}
-  <ul class="list-group">
-    <li class="list-group-item active" aria-current="true"><h2>Date of meal: {{date}}</h2></li>
-    <li class="list-group-item list-group-item-success">Breakfast:</li>
-    <li class="list-group-item list-group-item-secondary">Calories of Breakfast: {{bfCalories}} kcals</li>
-    <li class="list-group-item">A fourth item</li>
-    <li class="list-group-item">And a fifth one</li>
-  </ul>
+    <div class="d-flex flex-row mb-3 justify-content-center">
+        <h2 class="display-6 bg-warning text-white text-center w-50">Date of meal: {{date}}</h2>
+        <h3 class="fs-1 bg-info text-white text-center w-50">Calories of the meal:{{calories}}kcals</h3>
+    </div>
+    
+    <div class="d-flex flex-row mb-3 justify-content-center">
+        <div class="p-2">
+            <button class="btn btn-success col-2 lh-1 mx-3 opacity-75 text-white fs-5" style="width: 8em;"><a class="nav-link" href="/meals/{{_id}}/editfood">Edit Food</a></button>
+        </div>
+        <div class="p-2">
+            <button class="btn btn-primary col-2 lh-1 mx-3 opacity-75 text-white fs-5" style="width: 8em;"><a class="nav-link" href="/meals/{{_id}}/editquantity">Edit Quantity</a></button>
+        </div>
+        <div class="p-2">
+            <form action="/meals/{{_id}}/delete" method="POST">
+                <button class="btn btn-danger col-2 lh-1 mx-3 opacity-75 text-white fs-5" style="width: 8em;">Delete</button>
+            </form>
+        </div>
+    </div>
+
+    <div class="container text-center mb-5 ">
+    <div class="row">
+        <div class="col-3">
+            <ul class="list-group">
+                <li class="list-group-item list-group-item-warning fs-4">Breakfast</li>
+                <li class="list-group-item list-group-item-info fs-5">Calories of Breakfast: {{bfCalories}} kcals</li>
+                {{#each this.breakfastFood}}
+                <li class="list-group-item list-group-item-dark fs-6">{{name}} | Energy:{{energy}}kcals | Pieces:{{quantity}}   ->    Total Calories:{{totalCalories}} kcals</li>
+                <li class="list-group-item list-group-item-light"></li>
+                {{/each}}
+            </ul>
+        </div>
+        <div class="col-3">
+            <ul class="list-group">
+                <li class="list-group-item list-group-item-warning fs-4">Lunch</li>
+                <li class="list-group-item list-group-item-info fs-5">Calories of Lunch: {{lunchCalories}} kcals</li>
+                {{#each this.lunchFood}}
+                <li class="list-group-item list-group-item-dark fs-6">{{name}} | Energy:{{energy}}kcals | Pieces:{{quantity}}   ->    Total Calories:{{totalCalories}} kcals</li>
+                <li class="list-group-item list-group-item-light"></li>
+                {{/each}}
+            </ul>
+        </div>
+        <div class="col-3">
+            <ul class="list-group">
+                <li class="list-group-item list-group-item-warning fs-4">Dinner</li>
+                <li class="list-group-item list-group-item-info fs-5">Calories of Dinner: {{dinnerCalories}} kcals</li>
+                {{#each this.dinnerFood}}
+                <li class="list-group-item list-group-item-dark fs-6">{{name}} | Energy:{{energy}}kcals | Pieces:{{quantity}}   ->    Total Calories:{{totalCalories}} kcals</li>
+                <li class="list-group-item list-group-item-light"></li>
+                {{/each}}
+            </ul>
+        </div>
+        <div class="col-3">
+            <ul class="list-group">
+                <li class="list-group-item list-group-item-warning fs-4">Others</li>
+                <li class="list-group-item list-group-item-info fs-5">Calories of Other food: {{otherCalories}} kcals</li>
+                {{#each this.otherFood}}
+                <li class="list-group-item list-group-item-dark fs-6">{{name}} | Energy:{{energy}}kcals | Pieces:{{quantity}}   ->    Total Calories:{{totalCalories}} kcals</li>
+                <li class="list-group-item list-group-item-light"></li>
+                {{/each}}
+            </ul>
+        </div>
+    </div>
+    </div>
+  
+  
 
   
-  <p>
-    Breakfast:
-    <br />
-    Calories of Breakfast:
-    
-    <br />
 
-    {{#each this.breakfastFood}}
-      <br />
-      {{name}}
-      | Energy:
-      {{energy}}
-      kcals | Pieces:
-      {{quantity}}
-      |
-      <br />
-      Calories:
-      {{totalCalories}}
-      kcals
-      <br />
-    {{/each}}
-    <br />
-    Lunch:
-    <br />
-    Calories of Lunch:
-    {{lunchCalories}}
-    kcals
-    <br />
-    {{#each this.lunchFood}}
-      <br />
-      {{name}}
-      | Energy:
-      {{energy}}
-      kcals | Pieces:
-      {{quantity}}
-      |
-      <br />
-      Calories:
-      {{totalCalories}}
-      kcals
-      <br />
-    {{/each}}
-    <br />
-    Dinner:
-    <br />
-    Calories of Dinner:
-    {{dinnerCalories}}
-    kcals
-    <br />
-    {{#each this.dinnerFood}}
-      <br />
-      {{name}}
-      | Energy:
-      {{energy}}
-      kcals | Pieces:
-      {{quantity}}
-      |
-      <br />
-      Calories:
-      {{totalCalories}}
-      kcals
-      <br />
-    {{/each}}
-    <br />
-    This day I also ate:
-    <br />
-    Calories of Other food:
-    {{otherCalories}}
-    kcals
-    <br />
-    {{#each this.otherFood}}
-      <br />
-      {{name}}
-      | Energy:
-      {{energy}}
-      kcals | Pieces:
-      {{quantity}}
-      |
-      <br />
-      Calories:
-      {{totalCalories}}
-      kcals
-      <br />
-    {{/each}}
-    <br />
-    Calories:
-    {{calories}}
-    kcals<br />
+  
+ 
 
-    <a href="/meals/{{_id}}/editfood">Edit Food</a>
-    <a href="/meals/{{_id}}/editquantity">Edit Quantity</a>
-
-    <form action="/meals/{{_id}}/delete" method="POST">
-      <button>Delete</button>
-    </form>
-  </p>
+   
 
 {{/each}}
 {{else}}
