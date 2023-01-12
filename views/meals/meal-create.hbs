@@ -1,64 +1,68 @@
-<h2>Create a meal</h2>
-<div class="position-relative">
- <div class="col-md-5 p-lg-5 mx-auto my-5 carousel-caption text-center position-absolute top-50 start-50 translate-middle" id="searchFoodbar">
-           
-            <div class="position-absolute top-50 start-50 translate-middle my-3 pe-3 ">
-            <form class="d-flex flex-row" action="/searchFood" method="GET">                
-                <label>                    
-                    <input class="lh-lg rounded-4 text-center border border-success opacity-75 border-2 px-3 ms-5" type="string" name="foodName" placeholder="Food" />
-                </label>               
-                <button class="btn btn-success col-2 lh-1 mx-3 opacity-75 text-white fs-6" style="width: 25%;" type="submit">Search</button>               
-            </form>
+<h2 class="text-center m-5">Create a meal</h2>
+<div class="m-5 px-5 position-absolute top-50 start-50 translate-middle" style="width: 70%;">
+    
+    <div class="position-relative">
+        <div class="carousel-caption position-absolute top-50 translate-middle"
+            id="searchFoodbar">
+            <div class="position-absolute top-50 start-50 translate-middle my-4 ps-5 ms-5">
+                <form class="d-flex flex-row ms-5 ps-5" action="/searchFood" method="GET">
+                    <label>
+                        <input class="lh-lg rounded-4 text-center border border-success opacity-75 border-2 px-3 ms-5"
+                            type="string" name="foodName" placeholder="Food" />
+                    </label>
+                    <button class="btn btn-success col-2 lh-1 mx-3 opacity-75 text-white fs-6" style="width: 25%;"
+                        type="submit">Search</button>
+                </form>
             </div>
         </div>
+    </div>
+    
+
+    <form action="/meals/create" method="post">       
+        <div class="ms-5 ps-5">
+            <h4 name="username" class="text-center ms-5 mb-3">{{username}}</h4>
+        </div>
+        <div class="ms-4 pb-5 position-absolute start-50">
+            <label> Date:
+                <input name="date" type="date" />            
+            </label>
+        </div>
+        <div class="row row-cols-2 row-cols-md-1 ms-5 ps-5 mt-3">
+            <div class="m-5" style="width: 30%;">
+                <select name="breakfastFood" class="form-select" multiple aria-label="multiple select example">
+                    <option selected>Food of Breakfast:</option>
+                    {{#each foodArr}} 
+                    <option value="{{this._id}}">{{this.name}}</option>
+                    {{/each}}
+                </select>
+            </div>
+            <div class="m-5" style="width: 30%;">
+                <select name="lunchFood" class="form-select" multiple aria-label="multiple select example">
+                    <option selected>Food of Lunch:</option>
+                    {{#each foodArr}}
+                    <option value="{{this._id}}">{{this.name}}</option>
+                    {{/each}}
+                </select>
+            </div>
+            <div class="m-5" style="width: 30%;">
+                <select name="dinnerFood" class="form-select" multiple aria-label="multiple select example">
+                    <option selected>Food of Dinner:</option>
+                    {{#each foodArr}}
+                    <option value="{{this._id}}">{{this.name}}</option>
+                    {{/each}}
+                </select>
+            </div>
+            <div class="m-5" style="width: 30%;">
+                <select name="otherFood" class="form-select" multiple aria-label="multiple select example">
+                    <option selected>otherFood:</option>
+                    {{#each foodArr}}
+                    <option value="{{this._id}}">{{this.name}}</option>
+                    {{/each}}
+                </select>
+            </div>
+        </div>
+        <div class="mt-5 text-center me-5">
+            <button class="btn btn-success opacity-75 text-white" type="submit" style="width: 8em;"> Create </button>
+        </div>
+    </form>
 </div>
-<h3> My Food Database:</h3>
-   
-
-<br>
-<form action="/meals/create" method="post">
-    <label> User Name:
-       <h2>{{username}}</h2>
-       <input type="text" value= "{{username}}" name="userName" hidden>   
-    </label>
-
-    <label> Date:
-        <input type="date" name="date" /> 
-        
-    </label>
-
-
-    <label> Food of Breakfast:
-        <select name="breakfastFood" multiple>
-            {{#each foodArr}}
-            <option value="{{this._id}}">{{this.name}}</option>
-            {{/each}}
-        </select>
-    </label>
-
-    <label> Food of Lunch:
-        <select name="lunchFood" multiple>
-            {{#each foodArr}}
-            <option value="{{this._id}}">{{this.name}}</option>
-            {{/each}}
-        </select>
-    </label>
-
-    <label> Food of Dinner:
-        <select name="dinnerFood" multiple>
-            {{#each foodArr}}
-            <option value="{{this._id}}">{{this.name}}</option>
-            {{/each}}
-        </select>
-    </label>
-
-    <label> I also eat these today:
-        <select name="otherFood" multiple>
-            {{#each foodArr}}
-            <option value="{{this._id}}">{{this.name}}</option>
-            {{/each}}
-        </select>
-    </label>
-
-    <button type="submit"> Create </button>
-</form>
