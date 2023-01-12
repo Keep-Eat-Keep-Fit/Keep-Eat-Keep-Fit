@@ -1,23 +1,7 @@
 const User = require("../models/User.model");
 const router = require("express").Router();
-
-//in case the live of session come to end,we need to let the user login again
-const isLoggedIn = (req, res, next) => {
-  if(req.session.currentUser){
-      next(); 
-  } else {
-      res.redirect("/login")
-  }
-}
-
-//when the database already has the full information of the user
-const dbHasInfoOfUser = (req, res, next) => { 
-      if (req.session.currentUser.age && req.session.currentUser.gender && req.session.currentUser.weight && req.session.currentUser.height) {
-        next();
-      } else {
-        res.redirect("/user-profile/edit")
-      }; 
-}
+const dbHasInfoOfUser = require("../middleware/dbHasInfoOfUser");
+const isLoggedIn = require("../middleware/isLoggeIn");
 
 //display user-profile-details
 router.get("/user-profile/details",isLoggedIn, (req, res) =>{
@@ -43,16 +27,15 @@ router.get("/user-profile/edit", isLoggedIn, (req, res) =>{
 
 //user-information UPDATE (add the rest of the infomation we have mentioned in User-model )
 router.post("/user-profile/edit",isLoggedIn, (req, res, next) =>{
-   const {photo, age, gender, height, weight} = req.body;   
+   const {age, gender, height, weight} = req.body;    
    const userId = req.session.currentUser._id;   
-   updatedData = {
-    photo,   
+   updatedData = {   
     age,
     gender,
     height,
     weight
    }
-   User.findByIdAndUpdate(userId, updatedData)
+   User.findByIdAndUpdate(userId, updatedData,{new:true})
       .then(() =>{       
         res.redirect("/user-profile")
       })

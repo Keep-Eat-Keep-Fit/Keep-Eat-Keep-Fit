@@ -1,14 +1,14 @@
 const Food = require("../models/Food.model");
 const express = require('express');
 const router = express.Router();
-
+const isLoggedIn = require("../middleware/isLoggeIn");
 //window is not defined??
 const notice = () => {
     window.alert("This food has been added");
 }
 
 //CREATE: process
-router.post("/food/create", (req, res, next) => {
+router.post("/food/create", isLoggedIn, (req, res, next) => {
    const {username} = req.session.currentUser;
     
     const foodDetails = {
