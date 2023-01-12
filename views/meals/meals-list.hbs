@@ -1,73 +1,117 @@
-<h1>History Review</h1>
- 
- <a class="my-2 nav-link fs-5 text-secondary" href="/user-profile">My profile</a>
-
+<h1 class="m-4 text-center">History Review</h1>
+<br />
+{{#if mealsArrWithFormattedDate}}
 {{#each mealsArrWithFormattedDate}}
-    <section class="meals-detail">
-        
-        <h2>Date of meal: {{date}}</h2>
-        <p>
-            Breakfast: <br>
-            Calories of Breakfast: {{bfCalories}} kcals
-            <br>
-           
-            {{#each this.breakfastFood}}
-                 <br>
-                 {{name}} |
-                 Energy: {{energy}} kcals |
-                 Pieces: {{quantity}} |
-                 <br>
-                 Calories: {{totalCalories}} kcals
-                 <br> 
-            {{/each}}
-            <br>           
-            Lunch: <br>
-            Calories of Lunch: {{lunchCalories}} kcals
-            <br>
-            {{#each this.lunchFood}}
-                <br>
-                 {{name}} |
-                 Energy: {{energy}} kcals |
-                 Pieces: {{quantity}} |
-                 <br>
-                 Calories: {{totalCalories}} kcals
-                 <br> 
-            {{/each}}
-            <br>
-            Dinner: <br>
-            Calories of Dinner: {{dinnerCalories}} kcals
-            <br>
-            {{#each this.dinnerFood}}
-                 <br>
-                 {{name}} |
-                 Energy: {{energy}} kcals |
-                 Pieces: {{quantity}} |
-                 <br>
-                 Calories: {{totalCalories}} kcals
-                 <br> 
-            {{/each}}
-            <br>
-            This day I also ate: <br>
-            Calories of Other food: {{otherCalories}} kcals
-            <br>
-            {{#each this.otherFood}}
-                <br>
-                 {{name}} |
-                 Energy: {{energy}} kcals |
-                 Pieces: {{quantity}} |
-                 <br>
-                 Calories: {{totalCalories}} kcals
-                 <br> 
-            {{/each}}
-            <br>
-            Calories: {{calories}} kcals<br>
-            
-             <a href="/meals/{{_id}}/editfood">Edit Food</a>
-             <a href="/meals/{{_id}}/editquantity">Edit Quantity</a>
+  <ul class="list-group">
+    <li class="list-group-item active" aria-current="true"><h2>Date of meal: {{date}}</h2></li>
+    <li class="list-group-item list-group-item-success">Breakfast:</li>
+    <li class="list-group-item list-group-item-secondary">Calories of Breakfast: {{bfCalories}} kcals</li>
+    <li class="list-group-item">A fourth item</li>
+    <li class="list-group-item">And a fifth one</li>
+  </ul>
 
-            <form action="/meals/{{_id}}/delete" method="POST">
-                <button>Delete</button>
-            </form>
-        </p>
-    </section>
+  
+  <p>
+    Breakfast:
+    <br />
+    Calories of Breakfast:
+    
+    <br />
+
+    {{#each this.breakfastFood}}
+      <br />
+      {{name}}
+      | Energy:
+      {{energy}}
+      kcals | Pieces:
+      {{quantity}}
+      |
+      <br />
+      Calories:
+      {{totalCalories}}
+      kcals
+      <br />
+    {{/each}}
+    <br />
+    Lunch:
+    <br />
+    Calories of Lunch:
+    {{lunchCalories}}
+    kcals
+    <br />
+    {{#each this.lunchFood}}
+      <br />
+      {{name}}
+      | Energy:
+      {{energy}}
+      kcals | Pieces:
+      {{quantity}}
+      |
+      <br />
+      Calories:
+      {{totalCalories}}
+      kcals
+      <br />
+    {{/each}}
+    <br />
+    Dinner:
+    <br />
+    Calories of Dinner:
+    {{dinnerCalories}}
+    kcals
+    <br />
+    {{#each this.dinnerFood}}
+      <br />
+      {{name}}
+      | Energy:
+      {{energy}}
+      kcals | Pieces:
+      {{quantity}}
+      |
+      <br />
+      Calories:
+      {{totalCalories}}
+      kcals
+      <br />
+    {{/each}}
+    <br />
+    This day I also ate:
+    <br />
+    Calories of Other food:
+    {{otherCalories}}
+    kcals
+    <br />
+    {{#each this.otherFood}}
+      <br />
+      {{name}}
+      | Energy:
+      {{energy}}
+      kcals | Pieces:
+      {{quantity}}
+      |
+      <br />
+      Calories:
+      {{totalCalories}}
+      kcals
+      <br />
+    {{/each}}
+    <br />
+    Calories:
+    {{calories}}
+    kcals<br />
+
+    <a href="/meals/{{_id}}/editfood">Edit Food</a>
+    <a href="/meals/{{_id}}/editquantity">Edit Quantity</a>
+
+    <form action="/meals/{{_id}}/delete" method="POST">
+      <button>Delete</button>
+    </form>
+  </p>
+
 {{/each}}
+{{else}}
+<p>Please create the meal firstly</p>
+<button><a class="" href="./meals/create">New Meal Diary</a></button>
+{{/if}}
+
+
