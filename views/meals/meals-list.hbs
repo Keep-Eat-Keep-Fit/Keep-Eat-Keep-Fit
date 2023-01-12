@@ -22,7 +22,7 @@
             {{/each}}
             <br>           
             Lunch: <br>
-            Calories of Breakfast: {{lunchCalories}} kcals
+            Calories of Lunch: {{lunchCalories}} kcals
             <br>
             {{#each this.lunchFood}}
                 <br>
@@ -62,10 +62,12 @@
             <br>
             Calories: {{calories}} kcals<br>
             
-             <a href="/meals/{{_id}}/editfood">Edit</a>
+             <a href="/meals/{{_id}}/editfood">Edit Food</a>
+             <a href="/meals/{{_id}}/editquantity">Edit Quantity</a>
 
-                <form action="/meals/{{_id}}/delete" method="POST">
-                    <button>Delete</button>
+            <form action="/meals/{{_id}}/delete" method="POST">
+                <button>Delete</button>
+            </form>
         </p>
     </section>
 {{/each}}

@@ -1,22 +1,17 @@
-<h1>Meals in your DB</h1>
- 
-{{#each mealsArrWithFormattedDate}}
+<h2>Date of meal: {{mealDetails.date}}</h2>
+    <button><a href="/meals/">View My Meals</a></button>
+
     <section class="meals-detail">
-        
-        <h2>Date of meal: {{date}}</h2>
         <p>
             Breakfast: <br>
-            Calories of Breakfast: {{bfCalories}} kcals
-            <br>
-           
-            {{#each this.breakfastFood}}
+            {{#each mealDetails.breakfastFood}}
                  <br>
                  {{name}} |
-                 Energy: {{energy}} kcals |
-                 <form action="/meals/calculateCalorie" method="post">
+                 <form action="/meals/{{../mealId}}/editquantity" method="post">
                     Pieces: <input type="number" step="0.1" value="{{quantity}}" min="0" name="quantity" required> |
                     <input type="number" value="{{energy}}" name="energy" hidden>
                     <input type="string" value="{{_id}}" name="id" hidden>
+                    <input type="string" value="{{../mealId}}" name="mealId" hidden>
                     <button type="submit">Confirm</button>
                     Calories: {{totalCalories}} kcals
                  </form>
@@ -24,16 +19,15 @@
             {{/each}}
             <br>           
             Lunch: <br>
-            Calories of Breakfast: {{lunchCalories}} kcals
-            <br>
-            {{#each this.lunchFood}}
+            {{#each mealDetails.lunchFood}}
                 <br>
                  {{name}} |
                  Energy: {{energy}} kcals |
-                 <form action="/meals/calculateCalorie" method="post">
+                 <form action="/meals/{{../mealId}}/editquantity" method="post">
                     Pieces: <input type="number" step="0.1" value="{{quantity}}" min="0" name="quantity" required> |
                     <input type="number" value="{{energy}}" name="energy" hidden>
                     <input type="string" value="{{_id}}" name="id" hidden>
+                    <input type="string" value="{{../mealId}}" name="mealId" hidden>
                     <button type="submit">Confirm</button>
                     Calories: {{totalCalories}} kcals
                  </form>
@@ -41,17 +35,15 @@
             {{/each}}
             <br>
             Dinner: <br>
-            Calories of Dinner: {{dinnerCalories}} kcals
-            <br>
-            {{#each this.dinnerFood}}
+            {{#each mealDetails.dinnerFood}}
                  <br>
                  {{name}} |
                  Energy: {{energy}} kcals |
-                 <form action="/meals/calculateCalorie" method="post">
+                 <form action="/meals/{{../mealId}}/editquantity" method="post">
                     Pieces: <input type="number" step="0.1" value="{{quantity}}" min="0" name="quantity" required> |
                     <input type="number" value="{{energy}}" name="energy" hidden>
                     <input type="string" value="{{_id}}" name="id" hidden>
-                    <input type="number" value="{{totalCalories}}" hidden>
+                    <input type="string" value="{{../mealId}}" name="mealId" hidden>
                     <button type="submit">Confirm</button>
                     Calories: {{totalCalories}} kcals
                  </form>
@@ -59,16 +51,15 @@
             {{/each}}
             <br>
             This day I also ate: <br>
-            Calories of Other food: {{otherCalories}} kcals
-            <br>
-            {{#each this.otherFood}}
+            {{#each mealDetails.otherFood}}
                 <br>
                  {{name}} |
                  Energy: {{energy}} kcals |
-                 <form action="/meals/calculateCalorie" method="post">
+                 <form action="/meals/{{../mealId}}/editquantity" method="post">
                     Pieces: <input type="number" step="0.1" value="{{quantity}}" min="0" name="quantity" required> |
                     <input type="number" value="{{energy}}" name="energy" hidden>
                     <input type="string" value="{{_id}}" name="id" hidden>
+                    <input type="string" value="{{../mealId}}" name="mealId" hidden>
                     <button type="submit">Confirm</button>
                     Calories: {{totalCalories}} kcals
                  </form>
@@ -78,14 +69,7 @@
                 </form>
             {{/each}}
             <br>
-            Calories: {{calories}} kcals<br>
-            
-             <a href="/meals/{{_id}}/edit">Edit</a>
-
-                <form action="/meals/{{_id}}/delete" method="POST">
-                    <button>Delete</button>
         </p>
         
         <a class="my-2 nav-link fs-5 text-secondary" href="/user-profile">My profile</a>
     </section>
-{{/each}}

@@ -57,7 +57,7 @@ router.get("/meals", (req, res, next) => {
         .populate("dinnerFood")
         .populate("otherFood")
         .then(mealsArr => {
-            //console.log("*******", mealsArr);
+   
             const mealsArrWithFormattedDate = mealsArr.map( (meal) => {
 
                 //convert mongoose document to valid js object
@@ -76,7 +76,7 @@ router.get("/meals", (req, res, next) => {
             const data = {
                 mealsArrWithFormattedDate
             }
-            console.log(data);
+            
             res.render("meals/meals-list", data)
          
         })
@@ -85,8 +85,6 @@ router.get("/meals", (req, res, next) => {
             next(err);
         })
 })
-
-
 
 
 //UPDATE Food: display form
@@ -115,7 +113,6 @@ router.get("/meals/:mealId/editfood", (req, res, next) => {
                 mealDetails,
                 foodArr
             };
-            console.log("****", foodArr);
 
             res.render("meals/meal-edit-food", data);
         })
@@ -145,54 +142,37 @@ router.post("/meals/:mealId/editfood",  (req, res, next) => {
         });
 });
 
-//UPDATE quantity
-// mealsArr.forEach((e) => {
-//     let sumCalOfBf = 0;
-//     let sumCalOfLunch = 0;
-//     let sumCalOfDinner = 0;
-//     let sumCalOfOther = 0;
+//UPDATE quantity: display form
+router.get("/meals/:mealId/editquantity", (req, res, next) => { 
+    let mealId = req.params.mealId
+    Meal.findById(req.params.mealId)
+        .populate("breakfastFood lunchFood dinnerFood otherFood")
+        .then((mealDetails) => {
+                //convert mongoose document to valid js object
+                mealDetails = mealDetails.toObject();
+                //format date
+                const newDate = {
+                    date: dayjs(mealDetails.date).format('YYYY/MM/DD')
+                }
+                mealDetails.date = newDate.date;
+
+                const data = {
+                    mealDetails,
+                    mealId
+                };
+            res.render("meals/meal-edit-quantity", data);
+        })
+        .catch(err => {
+            console.log("Error getting meal details from DB...", err);
+            next();
+        });
+});
+
+//UPDATE quantity: process form
+router.post("/meals/:mealId/editquantity",  (req, res, next) => {
+    const mealId = req.params.mealId;
+    console.log('entered in the route')
     
-//     e.breakfastFood.forEach((e) => {
-//         sumCalOfBf += e.totalCalories;
-//     })
-
-//     e.lunchFood.forEach((e) => {
-//         sumCalOfLunch += e.totalCalories;
-//     })
-
-//     e.dinnerFood.forEach((e) => {
-//         sumCalOfDinner += e.totalCalories;
-//     })
-    
-//     e.otherFood.forEach((e) => {
-//         sumCalOfOther += e.totalCalories;
-//     })
-
-//     let totalCal = sumCalOfBf + sumCalOfLunch + sumCalOfDinner + sumCalOfOther;
-
-//     const newData = {
-//         bfCalories: Math.round(sumCalOfBf),
-//         lunchCalories: Math.round(sumCalOfLunch),
-//         dinnerCalories: Math.round(sumCalOfDinner),
-//         otherCalories: Math.round(sumCalOfOther),
-//         calories: Math.round(totalCal),
-//     }
-//     //console.log("1. The data is ",newData, e.id)
-
-//     Meal.findByIdAndUpdate(e.id, newData, {new: true})
-//         .then((mealsFromDB) => {
-//             // console.log("update success")
-//             // console.log("3", mealsFromDB);
-//         })
-//         .catch(err => {
-//             console.log("error getting meals from DB", err);
-//             next(err)
-//         })
-// })
-
-//Calculate Food Calorie
-router.post("/meals/calculateCalorie", (req, res, next) => {
-
     const { energy, quantity, id } = req.body;
     const calories = energy * quantity;
     const newData = {
@@ -201,17 +181,60 @@ router.post("/meals/calculateCalorie", (req, res, next) => {
         totalCalories: calories
     }
 
-    Food.findByIdAndUpdate(id, newData)
-        .then(() => {
-            res.redirect("/meals")
+    Food.findByIdAndUpdate(id, newData, {new: true})
+    .then((food) => {
+        console.log(food)
+        return food
+    })
+    .then(()=>{
+        Meal.findById(mealId)
+        .populate("breakfastFood lunchFood dinnerFood otherFood")
+        .then((mealsArr)=>{
+            
+                let sumCalOfBf = 0;
+                let sumCalOfLunch = 0;
+                let sumCalOfDinner = 0;
+                let sumCalOfOther = 0;
+                
+                mealsArr.breakfastFood.forEach((e) => {
+                    sumCalOfBf += e.totalCalories;
+                })
+            
+                mealsArr.lunchFood.forEach((e) => {
+                    sumCalOfLunch += e.totalCalories;
+                })
+            
+                mealsArr.dinnerFood.forEach((e) => {
+                    sumCalOfDinner += e.totalCalories;
+                })
+                
+                mealsArr.otherFood.forEach((e) => {
+                    sumCalOfOther += e.totalCalories;
+                })
+            
+                let totalCal = sumCalOfBf + sumCalOfLunch + sumCalOfDinner + sumCalOfOther;
+            
+                const newData = {
+                    bfCalories: Math.round(sumCalOfBf),
+                    lunchCalories: Math.round(sumCalOfLunch),
+                    dinnerCalories: Math.round(sumCalOfDinner),
+                    otherCalories: Math.round(sumCalOfOther),
+                    calories: Math.round(totalCal),
+                }
+                console.log("The data is ",newData)
+                return Meal.findByIdAndUpdate(mealId, newData)
+                
         })
-        .catch(err => {
-            console.log("error update meals from DB", err);
-            next(err)
+        .then(()=>{
+            res.redirect(`/meals/${mealId}/editquantity`)
         })
+        .catch(error => {
+            console.log('Error updating the food from the meal', error)
+            next(error)
+        })
+    })
 })
-
-
+   
 //DELETE
 router.post("/meals/:mealId/delete", (req, res, next) => {
     Meal.findByIdAndDelete(req.params.mealId)
