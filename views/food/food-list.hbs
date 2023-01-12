@@ -1,0 +1,16 @@
+<h1>Food in your DB</h1>
+ 
+{{#each foodFromDB}}
+    <section class="food-detail">
+        
+        <h2>Food name: {{name}}</h2>
+        <img src="{{image}}" alt="No image provided">
+        <p>Energy: {{energy}} kcals</p>
+        <a href="/food/{{_id}}/edit">Edit</a>
+
+        <form action="/food/{{_id}}/delete" method="POST">
+            <button>Delete</button>
+        </form>
+        <a class="my-2 nav-link fs-5 text-secondary" href="/user-profile">My profile</a>
+    </section>
+{{/each}}

@@ -1,11 +1,13 @@
 <h1>Meals in your DB</h1>
  
+ <a class="my-2 nav-link fs-5 text-secondary" href="/user-profile">My profile</a>
+
 {{#each mealsArrWithFormattedDate}}
-    <section class="book-summary">
+    <section class="meals-detail">
         
         <h2>Date of meal: {{date}}</h2>
         <p>
-            Food of Breakfast:
+            Breakfast: <br>
             Calories of Breakfast: {{bfCalories}} kcals
             <br>
            
@@ -13,70 +15,57 @@
                  <br>
                  {{name}} |
                  Energy: {{energy}} kcals |
-                 <form action="/meals/calculateCalorie" method="post">
-                    Pieces: <input type="number" step="0.1" value="{{quantity}}" min="0" name="quantity" required> |
-                    <input type="number" value="{{energy}}" name="energy" hidden>
-                    <input type="string" value="{{_id}}" name="id" hidden>
-                    <button type="submit">Confirm</button>
-                    Calories: {{totalCalories}} kcals
-                 </form>
+                 Pieces: {{quantity}} |
+                 <br>
+                 Calories: {{totalCalories}} kcals
                  <br> 
             {{/each}}
             <br>           
-            Food of Lunch: 
+            Lunch: <br>
             Calories of Breakfast: {{lunchCalories}} kcals
             <br>
             {{#each this.lunchFood}}
                 <br>
                  {{name}} |
                  Energy: {{energy}} kcals |
-                 <form action="/meals/calculateCalorie" method="post">
-                    Pieces: <input type="number" step="0.1" value="{{quantity}}" min="0" name="quantity" required> |
-                    <input type="number" value="{{energy}}" name="energy" hidden>
-                    <input type="string" value="{{_id}}" name="id" hidden>
-                    <button type="submit">Confirm</button>
-                    Calories: {{totalCalories}} kcals
-                 </form>
+                 Pieces: {{quantity}} |
+                 <br>
+                 Calories: {{totalCalories}} kcals
                  <br> 
             {{/each}}
             <br>
-            Food of Dinner:
+            Dinner: <br>
             Calories of Dinner: {{dinnerCalories}} kcals
             <br>
             {{#each this.dinnerFood}}
                  <br>
                  {{name}} |
                  Energy: {{energy}} kcals |
-                 <form action="/meals/calculateCalorie" method="post">
-                    Pieces: <input type="number" step="0.1" value="{{quantity}}" min="0" name="quantity" required> |
-                    <input type="number" value="{{energy}}" name="energy" hidden>
-                    <input type="string" value="{{_id}}" name="id" hidden>
-                    <input type="number" value="{{totalCalories}}" hidden>
-                    <button type="submit">Confirm</button>
-                    Calories: {{totalCalories}} kcals
-                 </form>
+                 Pieces: {{quantity}} |
+                 <br>
+                 Calories: {{totalCalories}} kcals
                  <br> 
             {{/each}}
             <br>
-            This day I also ate: 
+            This day I also ate: <br>
             Calories of Other food: {{otherCalories}} kcals
             <br>
             {{#each this.otherFood}}
                 <br>
                  {{name}} |
                  Energy: {{energy}} kcals |
-                 <form action="/meals/calculateCalorie" method="post">
-                    Pieces: <input type="number" step="0.1" value="{{quantity}}" min="0" name="quantity" required> |
-                    <input type="number" value="{{energy}}" name="energy" hidden>
-                    <input type="string" value="{{_id}}" name="id" hidden>
-                    <button type="submit">Confirm</button>
-                    Calories: {{totalCalories}} kcals
-                 </form>
+                 Pieces: {{quantity}} |
+                 <br>
+                 Calories: {{totalCalories}} kcals
                  <br> 
             {{/each}}
             <br>
             Calories: {{calories}} kcals<br>
             
+             <a href="/meals/{{_id}}/edit">Edit</a>
+
+                <form action="/meals/{{_id}}/delete" method="POST">
+                    <button>Delete</button>
         </p>
     </section>
 {{/each}}
