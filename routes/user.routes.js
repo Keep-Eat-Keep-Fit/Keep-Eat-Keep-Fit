@@ -10,6 +10,7 @@ router.get("/user-profile/details",isLoggedIn, (req, res) =>{
       .then((userInfo) =>{ 
      res.render("users/user-profile-details", userInfo)
       })    
+      .catch(error => console.log("Error getting user details from DB when display the user-profile page", error));  
 });
 
 
@@ -20,6 +21,7 @@ router.get("/user-profile/edit", isLoggedIn, (req, res) =>{
       .then((userInfo) =>{  
        res.render("users/user-profile-edit", userInfo)
       })  
+      .catch(error => console.log("Error getting user details from DB when display the profile-update page", error)); 
 });
 
 
@@ -45,28 +47,36 @@ router.post("/user-profile/edit",isLoggedIn, (req, res, next) =>{
 });
 
 //display BMI-Calculator
-router.get("/user-profile/bmi-calculator", isLoggedIn, (req, res, next) =>{
-  const userInfo = req.session.currentUser ;  
-  res.render("users/user-bmi-calculator", userInfo)
+router.get("/user-profile/bmi-calculator", isLoggedIn, (req, res, next) => {
+  const userId = req.session.currentUser._id;
+  User.findById(userId)
+    .then((userInfo) => {
+      res.render("users/user-bmi-calculator", userInfo)
+    })
+    .catch(error => console.log("Error getting user details from DB when display the BMI-calculator page", error))
 });
 
-router.post("/user-profile/bmi-calculator", isLoggedIn, dbHasInfoOfUser, (req, res, next) =>{
-  const userInfo = req.session.currentUser ;
-  const {age, gender, weight, height} = userInfo;
-  const bmiResult = weight/(height/100)**2; 
-  const bmiResult2 = bmiResult.toFixed(2);
-  const healthyWeight1 = (18.5 * (height/100)**2).toFixed(2);
-  const healthyWeight2 = (25 * (height/100)**2).toFixed(2);
-  const data = {
-    age,
-    gender,
-    weight,
-    height,
-    bmiResult2,
-    healthyWeight1,
-    healthyWeight2
-  } 
-  res.render("users/user-bmi-calculator", data)
+router.post("/user-profile/bmi-calculator", isLoggedIn, dbHasInfoOfUser, (req, res, next) => {
+  const userId = req.session.currentUser._id;
+  User.findById(userId)
+    .then((userInfo) => {
+      const { age, gender, weight, height } = userInfo;
+      const bmiResult = weight / (height / 100) ** 2;
+      const bmiResult2 = bmiResult.toFixed(2);
+      const healthyWeight1 = (18.5 * (height / 100) ** 2).toFixed(2);
+      const healthyWeight2 = (25 * (height / 100) ** 2).toFixed(2);
+      const data = {
+        age,
+        gender,
+        weight,
+        height,
+        bmiResult2,
+        healthyWeight1,
+        healthyWeight2
+      }
+      res.render("users/user-bmi-calculator", data)
+    })
+    .catch(error => console.log("Error getting user details from DB when calculate the BMI-index", error)); 
 });
 
 
