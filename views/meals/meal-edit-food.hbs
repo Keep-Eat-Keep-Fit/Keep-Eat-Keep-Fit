@@ -1,43 +1,61 @@
-<h2>Date of meal: {{mealDetails.date}}</h2>
+<section class="meal-container">
+    <div class="d-flex flex-row mb-3 justify-content-center">
+        <h2 class="display-6  text-center w-50 mt-5" >
+            <strong>Date of meal: {{mealDetails.date}}</strong> 
+        </h2>
+        <button class="btn btn-success col-2 lh-1 mx-3 opacity-75 text-white fs-5 mt-5" style="width: 8em;"><a class="nav-link" href="/meals/">View My Meals</a></button>
+    </div>
 
-<button><a href="/meals/">View My Meals</a></button>
+    
+    <form action="/meals/{{mealDetails._id}}/editfood" method="post">
+        <div class="ms-4 pb-5 position-absolute start-50">
+            <label> Date of meal
+                <input type="date" name="date" value="{{mealDetails.date}}" required/>
+            </label>
+        </div>
+        <div class="row row-cols-2 row-cols-md-1 ms-5 ps-5 mt-3">
+            <div class="m-4" style="width: 40%;">
+                <br>
+                <label> Breakfast:
+                    <select name="bfFood" class="form-select" multiple aria-label="multiple select example">
+                        {{#each foodArr}}
+                        <option value="{{_id}}">{{name}}</option>
+                        {{/each}}
+                    </select>
+                </label>
+            </div>
+            <div class="m-4" style="width: 40%;">
+                <br>
+                <label> Lunch:
+                    <select name="lunchFood" class="form-select" multiple aria-label="multiple select example">
+                        {{#each foodArr}}
+                        <option value="{{_id}}">{{name}}</option>
+                        {{/each}}
+                    </select>
+                </label>
+            </div>
+            <div class="m-4" style="width: 30%;">
+                <br>
+                <label> Dinner:
+                    <select name="dinnerFood" class="form-select" multiple aria-label="multiple select example">
+                        {{#each foodArr}}
+                        <option value="{{_id}}">{{name}}</option>
+                        {{/each}}
+                    </select>
+                </label>
+            </div>
+            <div class="m-4" style="width: 30%;">
+                <br>
+                <label> Other Food:
+                    <select name="otherFood" class="form-select" multiple aria-label="multiple select example">
+                        {{#each foodArr}}
+                        <option value="{{_id}}">{{name}}</option>
+                        {{/each}}
+                    </select>
+                </label>
+            </div>
+        </div>
+        <button>Save changes</button>
+    </form>
 
-<form action="/meals/{{mealDetails._id}}/editfood" method="post">
-    <label> Date of meal
-        <input type="date" name="date" value="{{mealDetails.date}}" required/>
-    </label>
 
-    <label> Breakfast:
-        <select name="bfFood" multiple>
-            {{#each foodArr}}
-            <option value="{{_id}}">{{name}}</option>
-            {{/each}}
-        </select>
-    </label>
-
-    <label> Lunch:
-        <select name="lunchFood" multiple>
-            {{#each foodArr}}
-            <option value="{{_id}}">{{name}}</option>
-            {{/each}}
-        </select>
-    </label>
-
-    <label> Dinner:
-        <select name="dinnerFood" multiple>
-            {{#each foodArr}}
-            <option value="{{_id}}">{{name}}</option>
-            {{/each}}
-        </select>
-    </label>
-
-    <label> Other Food:
-        <select name="otherFood" multiple>
-            {{#each foodArr}}
-            <option value="{{_id}}">{{name}}</option>
-            {{/each}}
-        </select>
-    </label>
-
-    <button>Save changes</button>
-</form>
