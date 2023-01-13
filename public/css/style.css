@@ -16,3 +16,20 @@
 #quantity-container {
   padding-left: 10rem;
 }
+
+.edit-food-container{
+  height: 12rem;
+}
+
+.form-height {
+  height: 8rem;
+  width: 20rem;
+}
+
+#save-button {
+  position: absolute;
+  display: flex;
+  left: 45vw;
+  color: black;
+  margin-bottom: 10rem;
+}
