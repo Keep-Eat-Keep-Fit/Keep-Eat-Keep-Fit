@@ -55,12 +55,16 @@ router.post("/user-profile/bmi-calculator", isLoggedIn, dbHasInfoOfUser, (req, r
   const {age, gender, weight, height} = userInfo;
   const bmiResult = weight/(height/100)**2; 
   const bmiResult2 = bmiResult.toFixed(2);
+  const healthyWeight1 = (18.5 * (height/100)**2).toFixed(2);
+  const healthyWeight2 = (25 * (height/100)**2).toFixed(2);
   const data = {
     age,
     gender,
     weight,
     height,
-    bmiResult2
+    bmiResult2,
+    healthyWeight1,
+    healthyWeight2
   } 
   res.render("users/user-bmi-calculator", data)
 });
