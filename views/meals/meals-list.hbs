@@ -1,84 +1,84 @@
-<h1 class="m-4 text-center display-4 text-primary">History Review</h1>
+<section class="meal-container" id="list-container">
 
-{{#if mealsArrWithFormattedDate}}
-{{#each mealsArrWithFormattedDate}}
+    <h1 class="m-4 text-center display-4 text-primary">History Review</h1>
+
+    {{#if mealsArrWithFormattedDate}}
+    {{#each mealsArrWithFormattedDate}}
+        <div class="d-flex flex-row mb-3 justify-content-center">
+            <h2 class="display-6 bg-warning text-white text-center w-50">Date of meal: {{date}}</h2>
+            <h3 class="fs-1 bg-info text-white text-center w-50">Calories of the meal:{{calories}}kcals</h3>
+        </div>
+        
+        <div class="d-flex flex-row mb-3 justify-content-center">
+            <div class="p-2">
+                <button class="btn btn-success col-2 lh-1 mx-3 opacity-75 text-white fs-5" style="width: 8em;"><a class="nav-link" href="/meals/{{_id}}/editfood">Edit Food</a></button>
+            </div>
+            <div class="p-2">
+                <button class="btn btn-primary col-2 lh-1 mx-3 opacity-75 text-white fs-5" style="width: 8em;"><a class="nav-link" href="/meals/{{_id}}/editquantity">Edit Quantity</a></button>
+            </div>
+            <div class="p-2">
+                <form action="/meals/{{_id}}/delete" method="POST">
+                    <button class="btn btn-danger col-2 lh-1 mx-3 opacity-75 text-white fs-5" style="width: 8em;">Delete</button>
+                </form>
+            </div>
+        </div>
+
+        <div class="container text-center mb-5 foods-container">
+        <div class="row">
+            <div class="col-3  ">
+                <ul class="list-group">
+                    <li class="list-group-item list-group-item-warning fs-4">Breakfast</li>
+                    <li class="list-group-item list-group-item-info fs-6">Calories of Breakfast: <strong>{{bfCalories}} kcals</strong></li>
+                    {{#each this.breakfastFood}}
+                    <li class="list-group-item list-group-item-dark fs-6">{{name}} | Energy:{{energy}}kcals | Pieces:{{quantity}}   ->    Total Calories:{{totalCalories}} kcals</li>
+                    <li class="list-group-item list-group-item-light"></li>
+                    {{/each}}
+                </ul>
+            </div>
+            <div class="col-3">
+                <ul class="list-group">
+                    <li class="list-group-item list-group-item-warning fs-4">Lunch</li>
+                    <li class="list-group-item list-group-item-info fs-6">Calories of Lunch: <strong>{{lunchCalories}} kcals</strong></li>
+                    {{#each this.lunchFood}}
+                    <li class="list-group-item list-group-item-dark fs-6">{{name}} | Energy:{{energy}}kcals | Pieces:{{quantity}}   ->    Total Calories:{{totalCalories}} kcals</li>
+                    <li class="list-group-item list-group-item-light"></li>
+                    {{/each}}
+                </ul>
+            </div>
+            <div class="col-3">
+                <ul class="list-group">
+                    <li class="list-group-item list-group-item-warning fs-4">Dinner</li>
+                    <li class="list-group-item list-group-item-info fs-6">Calories of Dinner: <strong>{{dinnerCalories}} kcals</strong></li>
+                    {{#each this.dinnerFood}}
+                    <li class="list-group-item list-group-item-dark fs-6">{{name}} | Energy:{{energy}}kcals | Pieces:{{quantity}}   ->    Total Calories:{{totalCalories}} kcals</li>
+                    <li class="list-group-item list-group-item-light"></li>
+                    {{/each}}
+                </ul>
+            </div>
+            <div class="col-3">
+                <ul class="list-group">
+                    <li class="list-group-item list-group-item-warning fs-4">Others</li>
+                    <li class="list-group-item list-group-item-info fs-6">Calories of Other food: <strong>{{otherCalories}} kcals</strong></li>
+                    {{#each this.otherFood}}
+                    <li class="list-group-item list-group-item-dark fs-6">{{name}} | Energy:{{energy}}kcals | Pieces:{{quantity}}   ->    Total Calories:{{totalCalories}} kcals</li>
+                    <li class="list-group-item list-group-item-light"></li>
+                    {{/each}}
+                </ul>
+            </div>
+        </div>
+        </div>
+    
+    {{/each}}
+    <h1 class="display-2 text-white">****</h1>
+    {{else}}
+    <p class="m-4 text-center fs-2">Please create the meal firstly</p>
     <div class="d-flex flex-row mb-3 justify-content-center">
-        <h2 class="display-6 bg-warning text-white text-center w-50">Date of meal: {{date}}</h2>
-        <h3 class="fs-1 bg-info text-white text-center w-50">Calories of the meal:{{calories}}kcals</h3>
+        <button class="btn btn-success col-2 lh-1 mx-3 opacity-75 text-white fs-5 " ><a class="nav-link" href="./meals/create">New Meal Diary</a></button>
     </div>
     
-    <div class="d-flex flex-row mb-3 justify-content-center">
-        <div class="p-2">
-            <button class="btn btn-success col-2 lh-1 mx-3 opacity-75 text-white fs-5" style="width: 8em;"><a class="nav-link" href="/meals/{{_id}}/editfood">Edit Food</a></button>
-        </div>
-        <div class="p-2">
-            <button class="btn btn-primary col-2 lh-1 mx-3 opacity-75 text-white fs-5" style="width: 8em;"><a class="nav-link" href="/meals/{{_id}}/editquantity">Edit Quantity</a></button>
-        </div>
-        <div class="p-2">
-            <form action="/meals/{{_id}}/delete" method="POST">
-                <button class="btn btn-danger col-2 lh-1 mx-3 opacity-75 text-white fs-5" style="width: 8em;">Delete</button>
-            </form>
-        </div>
-    </div>
-
-    <div class="container text-center mb-5 ">
-    <div class="row">
-        <div class="col-3">
-            <ul class="list-group">
-                <li class="list-group-item list-group-item-warning fs-4">Breakfast</li>
-                <li class="list-group-item list-group-item-info fs-5">Calories of Breakfast: {{bfCalories}} kcals</li>
-                {{#each this.breakfastFood}}
-                <li class="list-group-item list-group-item-dark fs-6">{{name}} | Energy:{{energy}}kcals | Pieces:{{quantity}}   ->    Total Calories:{{totalCalories}} kcals</li>
-                <li class="list-group-item list-group-item-light"></li>
-                {{/each}}
-            </ul>
-        </div>
-        <div class="col-3">
-            <ul class="list-group">
-                <li class="list-group-item list-group-item-warning fs-4">Lunch</li>
-                <li class="list-group-item list-group-item-info fs-5">Calories of Lunch: {{lunchCalories}} kcals</li>
-                {{#each this.lunchFood}}
-                <li class="list-group-item list-group-item-dark fs-6">{{name}} | Energy:{{energy}}kcals | Pieces:{{quantity}}   ->    Total Calories:{{totalCalories}} kcals</li>
-                <li class="list-group-item list-group-item-light"></li>
-                {{/each}}
-            </ul>
-        </div>
-        <div class="col-3">
-            <ul class="list-group">
-                <li class="list-group-item list-group-item-warning fs-4">Dinner</li>
-                <li class="list-group-item list-group-item-info fs-5">Calories of Dinner: {{dinnerCalories}} kcals</li>
-                {{#each this.dinnerFood}}
-                <li class="list-group-item list-group-item-dark fs-6">{{name}} | Energy:{{energy}}kcals | Pieces:{{quantity}}   ->    Total Calories:{{totalCalories}} kcals</li>
-                <li class="list-group-item list-group-item-light"></li>
-                {{/each}}
-            </ul>
-        </div>
-        <div class="col-3">
-            <ul class="list-group">
-                <li class="list-group-item list-group-item-warning fs-4">Others</li>
-                <li class="list-group-item list-group-item-info fs-5">Calories of Other food: {{otherCalories}} kcals</li>
-                {{#each this.otherFood}}
-                <li class="list-group-item list-group-item-dark fs-6">{{name}} | Energy:{{energy}}kcals | Pieces:{{quantity}}   ->    Total Calories:{{totalCalories}} kcals</li>
-                <li class="list-group-item list-group-item-light"></li>
-                {{/each}}
-            </ul>
-        </div>
-    </div>
-    </div>
-  
-  
-
-  
-
-  
- 
-
-   
-
-{{/each}}
-{{else}}
-<p>Please create the meal firstly</p>
-<button><a class="" href="./meals/create">New Meal Diary</a></button>
 {{/if}}
+
+</section>
+
 
 
