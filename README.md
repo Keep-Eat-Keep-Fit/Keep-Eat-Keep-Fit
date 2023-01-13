@@ -33,9 +33,11 @@ After forking and cloning the project, you will have to install all the dependen
 The [Edamam Food and Grocery Database](https://rapidapi.com/edamam/api/edamam-food-and-grocery-database) need a X-RapidAPI-Key and X-RapidAPI-Host in order to give us permission to make requests and get some data back. To get `X-RapidAPI-Key` and `X-RapidAPI-Host`, we have to register on the [RapidAPI](https://rapidapi.com) (you won't be charged for this, and no credit card information will be required). Then put them in your `.env` file :
 
 `CLIENT_KEY = 'Your Key should be here'
+
  CLIENT_HOST = 'edamam-food-and-grocery-database.p.rapidapi.com'`
 
 -- getting session info
+
 You need to store the `SESS_SECRET = 'Your choice here'`here in `.env` file.
 
 
@@ -51,5 +53,5 @@ Link to the deployed version of the project (adaptable):
 
 Enjoy!
 
-:laughing:
+
 :heart:
