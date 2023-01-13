@@ -1,75 +1,92 @@
-<h2>Date of meal: {{mealDetails.date}}</h2>
-    <button><a href="/meals/">View My Meals</a></button>
+<section class="meal-container">
+    
+    <div class="d-flex flex-row mb-3 justify-content-center">
+        <h2 class="display-6  text-center w-50 mt-5" >
+            <strong>Date of meal: {{mealDetails.date}}</strong> 
+        </h2>
+        <button class="btn btn-success col-2 lh-1 mx-3 opacity-75 text-white fs-5 mt-5" style="width: 8em;"><a class="nav-link" href="/meals/">View My Meals</a></button>
+    </div>
+    
+    <div class="container text-center" id="quantity-container">
+        <div class="row">
+            <div class="col-5 border border-danger-subtle m-3">
+                <h3 class="quantity-subtitle">
+                    Breakfast:
+                </h3>
+                {{#each mealDetails.breakfastFood}}
+                    {{name}} | Energy: {{energy}} kcals 
+                    <br>
+                    <br>
+                    <form action="/meals/{{../mealId}}/editquantity" method="post">
+                        Pieces: <input class="quantity-input" type="number" step="0.1" value="{{quantity}}" min="0" name="quantity" required> |
+                        <input type="number" value="{{energy}}" name="energy" hidden>
+                        <input type="string" value="{{_id}}" name="id" hidden>
+                        <input type="string" value="{{../mealId}}" name="mealId" hidden>
+                        <button type="submit" class="btn btn-primary col-2 lh-1 mx-3 opacity-75 text-white fs-6">Confirm</button>
+                        Calories: {{totalCalories}} kcals
+                    </form>
+                    <br> 
+                {{/each}}
+            </div>
+            <div class="col-5 border border-danger-subtle m-3">
+                <h3 class="quantity-subtitle">
+                    Lunch:
+                </h3>
+                {{#each mealDetails.lunchFood}}
+                    {{name}} | Energy: {{energy}} kcals 
+                    <br>
+                    <br>
+                    <form action="/meals/{{../mealId}}/editquantity" method="post">
+                        Pieces: <input class="quantity-input" type="number" step="0.1" value="{{quantity}}" min="0" name="quantity" required> |
+                        <input type="number" value="{{energy}}" name="energy" hidden>
+                        <input type="string" value="{{_id}}" name="id" hidden>
+                        <input type="string" value="{{../mealId}}" name="mealId" hidden>
+                        <button type="submit" class="btn btn-primary col-2 lh-1 mx-3 opacity-75 text-white fs-6">Confirm</button>
+                        Calories: {{totalCalories}} kcals
+                    </form>
+                    <br> 
+                {{/each}}
+            </div>
+            <div class="col-5 border border-danger-subtle m-3">
+                <h3 class="quantity-subtitle">
+                    Dinner:
+                </h3>
+                {{#each mealDetails.dinnerFood}}
+                    {{name}} | Energy: {{energy}} kcals 
+                    <br>
+                    <br>
+                    <form action="/meals/{{../mealId}}/editquantity" method="post">
+                        Pieces: <input class="quantity-input" type="number" step="0.1" value="{{quantity}}" min="0" name="quantity" required> |
+                        <input type="number" value="{{energy}}" name="energy" hidden>
+                        <input type="string" value="{{_id}}" name="id" hidden>
+                        <input type="string" value="{{../mealId}}" name="mealId" hidden>
+                        <button type="submit" class="btn btn-primary col-2 lh-1 mx-3 opacity-75 text-white fs-6">Confirm</button>
+                        Calories: {{totalCalories}} kcals
+                    </form>
+                    <br> 
+                {{/each}}
+            </div>
+            <div class="col-5 border border-danger-subtle m-3">
+                <h3 class="quantity-subtitle">
+                    Other Food:
+                </h3>
+                {{#each mealDetails.otherFood}}
+                    {{name}} | Energy: {{energy}} kcals 
+                    <br>
+                    <br>
+                    <form action="/meals/{{../mealId}}/editquantity" method="post">
+                        Pieces: <input class="quantity-input" type="number" step="0.1" value="{{quantity}}" min="0" name="quantity" required> |
+                        <input type="number" value="{{energy}}" name="energy" hidden>
+                        <input type="string" value="{{_id}}" name="id" hidden>
+                        <input type="string" value="{{../mealId}}" name="mealId" hidden>
+                        <button type="submit" class="btn btn-primary col-2 lh-1 mx-3 opacity-75 text-white fs-6">Confirm</button>
+                        Calories: {{totalCalories}} kcals
+                    </form>
+                    <br> 
+                {{/each}}
+            </div>
+        </div>
+    </div>
+</section>
 
-    <section class="meals-detail">
-        <p>
-            Breakfast: <br>
-            {{#each mealDetails.breakfastFood}}
-                 <br>
-                 {{name}} |
-                 <form action="/meals/{{../mealId}}/editquantity" method="post">
-                    Pieces: <input type="number" step="0.1" value="{{quantity}}" min="0" name="quantity" required> |
-                    <input type="number" value="{{energy}}" name="energy" hidden>
-                    <input type="string" value="{{_id}}" name="id" hidden>
-                    <input type="string" value="{{../mealId}}" name="mealId" hidden>
-                    <button type="submit">Confirm</button>
-                    Calories: {{totalCalories}} kcals
-                 </form>
-                 <br> 
-            {{/each}}
-            <br>           
-            Lunch: <br>
-            {{#each mealDetails.lunchFood}}
-                <br>
-                 {{name}} |
-                 Energy: {{energy}} kcals |
-                 <form action="/meals/{{../mealId}}/editquantity" method="post">
-                    Pieces: <input type="number" step="0.1" value="{{quantity}}" min="0" name="quantity" required> |
-                    <input type="number" value="{{energy}}" name="energy" hidden>
-                    <input type="string" value="{{_id}}" name="id" hidden>
-                    <input type="string" value="{{../mealId}}" name="mealId" hidden>
-                    <button type="submit">Confirm</button>
-                    Calories: {{totalCalories}} kcals
-                 </form>
-                 <br> 
-            {{/each}}
-            <br>
-            Dinner: <br>
-            {{#each mealDetails.dinnerFood}}
-                 <br>
-                 {{name}} |
-                 Energy: {{energy}} kcals |
-                 <form action="/meals/{{../mealId}}/editquantity" method="post">
-                    Pieces: <input type="number" step="0.1" value="{{quantity}}" min="0" name="quantity" required> |
-                    <input type="number" value="{{energy}}" name="energy" hidden>
-                    <input type="string" value="{{_id}}" name="id" hidden>
-                    <input type="string" value="{{../mealId}}" name="mealId" hidden>
-                    <button type="submit">Confirm</button>
-                    Calories: {{totalCalories}} kcals
-                 </form>
-                 <br> 
-            {{/each}}
-            <br>
-            This day I also ate: <br>
-            {{#each mealDetails.otherFood}}
-                <br>
-                 {{name}} |
-                 Energy: {{energy}} kcals |
-                 <form action="/meals/{{../mealId}}/editquantity" method="post">
-                    Pieces: <input type="number" step="0.1" value="{{quantity}}" min="0" name="quantity" required> |
-                    <input type="number" value="{{energy}}" name="energy" hidden>
-                    <input type="string" value="{{_id}}" name="id" hidden>
-                    <input type="string" value="{{../mealId}}" name="mealId" hidden>
-                    <button type="submit">Confirm</button>
-                    Calories: {{totalCalories}} kcals
-                 </form>
-                 <br> 
 
-                
-                </form>
-            {{/each}}
-            <br>
-        </p>
-        
-        <a class="my-2 nav-link fs-5 text-secondary" href="/user-profile">My profile</a>
-    </section>
