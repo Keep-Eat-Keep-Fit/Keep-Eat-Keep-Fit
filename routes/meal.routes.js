@@ -124,12 +124,14 @@ router.get("/meals/:mealId/editfood", isLoggedIn, (req, res, next) => {
 //UPDATE Food: process form
 router.post("/meals/:mealId/editfood", isLoggedIn, (req, res, next) => {
     const mealId = req.params.mealId;
-
+    
     let {
-        date, bfFood, lunchFood, dinnerFood, otherFood
+        date, breakfastFood
+        , lunchFood, dinnerFood, otherFood
     } = req.body;
 
-    let newDetails = {date, bfFood, lunchFood, dinnerFood, otherFood}
+    let newDetails = {date, breakfastFood
+        , lunchFood, dinnerFood, otherFood}
 
     Meal.findByIdAndUpdate(mealId, newDetails)
         .then(() => {
